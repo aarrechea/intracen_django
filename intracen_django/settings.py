@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'countries',
     'industries',
     'accounts',
+    'user_profile',
 ]
 
 MIDDLEWARE = [

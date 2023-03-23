@@ -120,7 +120,8 @@ body td {
         width: 70%;}
 
         .items_menu span,
-        .items_menu a {        
+        .items_menu a {       
+            display: flex; 
             font-size: 1.3rem;
             text-align: left;
             margin-right: 1.2rem;
