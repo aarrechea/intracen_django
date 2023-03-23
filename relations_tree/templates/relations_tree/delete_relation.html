@@ -1,0 +1,54 @@
+<!-- ----- Imports ----- -->
+{% load static %}
+
+
+
+
+<!-- ----- Html ----- -->
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{% static 'css/delete_relation.css' %}">
+      <title>Delete relation</title>
+   </head>
+
+
+
+
+   <!-- ----- Body ----- -->
+   <body>
+      <div id="div_modal_delete">
+         <div id="div_modal_content_delete">            
+            <div id="div_modal_title_bar_delete">
+               <h2 id="h1_relation_name_delete"></h2>               
+               <h2 class="close_modal_delete">&times;</h2>  
+            </div>
+            
+            <div id="div_relation_delete">
+               <h3>Do you want to delete this relation?</h3>
+            </div>
+
+            <div id="div_form_delete">
+               <form action="{% url 'relations:delete' %}" method='POST'>
+                  {% csrf_token %}
+         
+                  <input hidden type="text" name="id_relation" id="id_relation_delete">
+   
+                  <input id="back_delete" type="button" value="Back">
+                  <input type="submit" value="Delete">
+               </form>            
+            </div>            
+         </div>
+      </div>
+
+
+
+
+      <!-- ----- Scripts ----- -->
+      <script src="{% static 'js/jquery.js' %}"></script>
+      <script src="{% static 'js/delete_relation.js' %}"></script>      
+   </body>
+</html>

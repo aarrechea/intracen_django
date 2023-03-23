@@ -1,0 +1,117 @@
+<!-- ----- Imports ----- -->
+{% extends 'general/base.html' %}
+{% load static %}
+{% csrf_token %}
+
+
+<!-- ----- Block title ----- -->
+{% block title %}{{element}}{% endblock title %}
+
+
+<!-- ----- Block content ----- -->
+{% block content %}  
+   <!-- ----- Includes ----- -->
+   {% include 'elements/add_info.html' %}
+   {% include 'elements/delete.html' %}
+
+
+   <!-- ----- Messages ----- -->
+   {% if messages %}
+      {% for message in messages %}
+         <input hidden type="text" id="flag" value="{{message}}">        
+      {% endfor %}
+   {% endif %}
+
+
+   <!-- ----- Title ----- -->
+   <div class="element-title">
+      <input hidden id="input_element" type="text" value="{{element}}">
+      <h1 id="element-title">{{element|capfirst}}</h1>
+      <a href="{% url 'elements:add' element %}">Add </a>
+   </div>
+   
+
+   <!-- ----- Middle div ----- -->
+   <div class="middle-div">
+      <div>
+         <select id="selectElement" name="" id="">
+            <option value="0">All</option>
+            {% for element in list %}
+               {% ifchanged element.letter %}
+                  <option value="{{element.letter.id}}">{{element.letter}}</option>
+               {% endifchanged %}               
+            {% endfor %}
+         </select>
+      </div>     
+
+      <div>
+         <h4 id="total_elements">Total elements listed {{list|length}}</h4>
+      </div>
+   </div>
+
+
+   <!-- ----- Body ----- -->
+   <ul id="ul-list">      
+      {% for element in list %}               
+         <li class="element-card">
+            <div>
+               {{element.letter}} - {{element.name}}
+            </div>
+                        
+            <div>
+               Eip &nbsp; &nbsp; {{element.eva_progress}} &nbsp; - &nbsp; EM &nbsp; &nbsp; {{element.eva_made}}
+            </div>
+            
+            <div>
+               <span data-id="{{element.id}}" class="buttom buttom-comments">Additional info</span>
+               <span class="separator">-</span>               
+
+               {% if element.eva_made > 0 or element.eva_progress > 0 %}
+                  <span style="font-style:italic">Edit</span>
+                  <span class="separator">-</span>
+                  <span style="font-style:italic">Delete</span>
+               {% else %}
+                  <a href="{% url 'elements:edit' element.type element.id %}" class="buttom buttom-edit">Edit </a>
+                  <span class="separator">-</span>
+                  <span data-id='{{element.id}}' class="buttom buttom-delete">Delete</span>
+               {% endif %}               
+            </div>            
+         </li>                        
+      {% endfor %}   
+   </ul>         
+
+
+   <!-- ----- Scripts ----- -->
+   <script src="{% static 'js/jquery.js' %}"></script>
+   <script src="{% static 'js/element.js' %}"></script>   
+   <script src="{% static 'js/delete.js' %}"></script>
+
+
+   <!-- ----- Hidden table that holds the list ----- -->
+   <table hidden id="table_list">
+      <body id="body_list">
+         {% for element in list %}
+            <tr>
+               <td>{{element.id}}</td>
+               <td>{{element.letter.id}}</td>
+               <td>{{element.letter}}</td>
+               <td>{{element.name}}</td>
+               <td>{{element.eva_progress}}</td>
+               <td>{{element.eva_made}}</td>        
+               <td>{{element.type}}</td>                           
+            </tr>
+         {% endfor %}
+      </body>
+   </table>
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+

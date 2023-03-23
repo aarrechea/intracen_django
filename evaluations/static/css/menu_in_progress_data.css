@@ -1,0 +1,88 @@
+/* ----- Div fixed bar ----- */
+#div_fixed_bar {
+   display: grid;   
+   grid-template-columns: 1fr;
+   width: 100%;
+   justify-items: center;
+   align-items: center;
+   height: 8rem;
+   margin: 0 auto;
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 1;
+   background-color: white;}
+
+
+
+   
+/* ----- Div bar ----- */
+#div_bar {
+   display: grid;   
+   grid-template-columns: 1fr;
+   grid-template-rows: 20% 20% 60%;
+   width: 70%;
+   justify-items: center;
+   align-items: center;
+   height: 100%;
+   margin: 0 auto;
+   border-radius: 0 0 3% 3%;
+   background-color: #ffd280;}
+
+   #div_bar label {
+      font-size: 1.2rem;
+      text-align: center;}
+
+   #div_bar > label {
+      display: block;
+      padding: 0.25rem;}
+
+   #div_bar > div {
+      display: grid;   
+      grid-template-columns: repeat(3, 1fr);
+      width: 30%;
+      justify-items: center;
+      align-items: center;      
+      margin: 0 auto;}
+
+      #div_bar div label {
+         display: block;
+         padding: 0.1rem;}
+
+      #div_bar div a {
+         text-decoration: none;
+         color: black;
+         font-size: 1.15rem;
+         text-align: center;}
+
+
+
+
+/* --- Previous and next labels */      
+.change:hover {
+   font-weight: bold;
+   cursor: pointer;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

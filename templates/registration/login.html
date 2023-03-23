@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">      
+      <title>Login page</title>
+      
+      <style>
+         div {
+            display: grid;
+            grid-template-columns: 1fr;
+            justify-content: center;
+            align-items: center;
+            margin: 10rem auto 0 auto;
+            text-align: center;
+            width: 50%;
+         }
+
+         label {
+            font-size: 1.2rem;
+         }
+
+         input {
+            width: 15rem;
+            height: 2rem;
+            padding: 0.5rem;
+            font-size: 1.3rem;
+            background-color: white;
+         }
+
+         button {
+            width: 6rem;
+            height: 2.5rem;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            background-color: white;
+            border-radius: 10%;
+         }
+
+         button:hover {
+            font-weight: bold;
+            cursor: pointer;            
+         }
+      </style>         
+   </head>
+
+
+   <body>
+      <div>
+         <h2>Log In</h2>
+
+         <form method="post">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+         
+            <button type="submit">Log In</button>
+         </form>      
+      </div>      
+   </body>
+</html>
+

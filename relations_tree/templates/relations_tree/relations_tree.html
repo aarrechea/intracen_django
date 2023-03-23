@@ -1,0 +1,172 @@
+<!-- ----- Imports ----- -->
+{% extends 'general/base.html' %}
+{% load static %}
+
+
+
+
+
+
+
+
+
+<!-- ----- Block styles ----- -->
+{% block styles %}
+   <link rel="stylesheet" href="{% static 'css/relations_tree.css' %}">
+{% endblock styles %}
+
+
+
+
+<!-- ----- Block content ----- -->
+{% block content %}
+   <!-- ----- Inlcludes ----- -->
+   {% include 'relations_tree/additional_info.html' %}
+   {% include 'relations_tree/delete_relation.html' %}
+
+
+   <!-- ----- Messages ----- -->
+   {% if messages %}
+      {% for message in messages %}
+         <input hidden type="text" id="flag" value="{{message}}">        
+      {% endfor %}
+   {% else %}
+      <input hidden type="text" id="flag" value="">
+   {% endif %}
+
+
+   <div id="div_title">
+      <h1>Relations tree</h1>
+      <a href="{% url 'relations:change' 'add' %}">Add relation</a>
+   </div>
+
+
+   <div id="div_table">
+      <table>
+         <thead>
+            <tr>
+               <th style="width: 37%;">Relation name</th>
+               <th style="width: 5%;">Total<br>elements</th>
+               <th style="width: 8%;">Competences</th>
+               <th style="width: 8%;">Capabilities</th>
+               <th style="width: 6%;">Processes</th>
+               <th style="width: 8%;">Evaluations<br>made</th>
+               <th style="width: 8%;">Evaluations<br>in progress</th>
+               <th style="width: 5%;">Status</th>
+               <th style="width: 15%;" colspan='3'>Actions</th>
+            </tr>
+         </thead>
+
+
+         <tbody id="body_relations">
+            {% for element in list %}
+               <tr class='tr_card'>
+                  <td>{{element.name}}</td> <!-- 0 --> 
+                  <td style="text-align:center">{{element.total_elements}}</td>
+                  <td style="text-align:center">{{element.total_competences}}</td>
+                  <td style="text-align:center">{{element.total_capabilities}}</td> <!-- 3 --> 
+                  <td style="text-align:center">{{element.total_processes}}</td>
+                  <td style="text-align:center">{{element.eva_made}}</td>
+                  <td style="text-align:center">{{element.eva_progress}}</td> <!-- 6 -->
+                  <td style="text-align:center">{{element.status}}</td>
+                  <td style="text-align:center" class="view">View</td> <!-- 8 -->
+
+                  <td style="text-align:center">
+                     <a class='edit' href="{% url 'relations:change' 'edit' element.id %}">Edit</a>
+                  </td> <!-- 9 --> 
+                  
+                  <td class="delete_relation" style="text-align:center">Delete</td>
+                  <td hidden>{{element.comments}}</td>
+                  <td hidden>{{element.created}}</td> <!-- 12 --> 
+                  <td hidden>{{element.updated}}</td>   
+                  <td hidden>{{element.id}}</td> <!-- 14 --> 
+               </tr>               
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+
+
+   <!-- ----- Scripts ----- -->
+   <script src="{% static 'js/jquery.js' %}"></script>
+   <script src="{% static 'js/relations_tree.js' %}"></script>
+
+
+   <!-- ----- Hidden table relations comp ----- -->
+   <table hidden>
+      <tbody id="body_comp">
+         {% for element in list_comp %}
+            <tr>
+               <td>{{element.original_letter}}</td> <!-- 0 -->
+               <td>{{element.relation_letter}}</td>
+               <td>{{element.percentage}}</td>
+               <td>{{element.order}}</td> <!-- 3 -->
+               <td>{{element.id_relation.id}}</td>
+               <td>{{element.id_element.id}}</td>
+               <td>{{element.id_element.name}}</td> <!-- 6 -->
+            </tr>
+         {% endfor %}         
+      </tbody>
+   </table>
+
+   <!-- ----- Hidden table relations cap ----- -->
+   <table hidden>
+      <tbody id="body_cap">
+         {% for element in list_cap %}
+            <tr>               
+               <td>{{element.number}}</td> <!-- 0 -->
+               <td>{{element.percentage}}</td>
+               <td>{{element.order}}</td>
+               <td>{{element.id_relation.id}}</td> <!-- 3 -->
+               <td>{{element.id_element.id}}</td>
+               <td>{{element.id_element.name}}</td>
+            </tr>
+         {% endfor %}         
+      </tbody>
+   </table>
+
+   <!-- ----- Hidden table relations pro ----- -->
+   <table hidden>
+      <tbody id="body_pro">
+         {% for element in list_pro %}
+            <tr>               
+               <td>{{element.number}}</td> <!-- 0 -->
+               <td>{{element.percentage}}</td>
+               <td>{{element.order}}</td>
+               <td>{{element.id_relation.id}}</td> <!-- 3 -->
+               <td>{{element.id_element.id}}</td>
+               <td>{{element.id_element.name}}</td>
+            </tr>
+         {% endfor %}         
+      </tbody>
+   </table>
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

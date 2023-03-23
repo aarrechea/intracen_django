@@ -1,0 +1,301 @@
+{% extends 'menu_in_progress_data.html' %}
+{% load static %}
+{% csrf_token %}
+
+
+
+{% block head %}
+   <link rel="stylesheet" href="{% static 'css/in_progress_data.css' %}">
+{% endblock head %}
+
+
+{% block body %}
+   <!-- --- Hidden input id eva --- -->
+   <input hidden type="text" id="input_hidden_id_eva" value="{{data.id_evaluation.id}}">
+
+
+   <!-- --- Include modal changes --- -->
+   {% include 'changes.html' %}
+
+   <!-- --- Div exporting and investment --- -->
+   <div id="div_exporting_title">
+      <label>Exports and investment</label>
+   </div>
+
+   <div id="div_exporting">      
+      <div>
+         <label class="title">Years exporting</label>   
+         <div>
+            <label class="exporting arrow" id="down_exporting_long">&#10229;</label>
+            <label class="exporting arrow" id="down_exporting">&#8672;</label>
+            <label class="main" id="years_exporting">{{data.years_exporting}}</label>
+            <label class="exporting arrow" id="up_exporting">&#8674;</label>
+            <label class="exporting arrow" id="up_exporting_long">&#10230;</label>
+         </div>       
+         <label class="main" id="zero_exporting">Zero</label>
+      </div>
+      
+      <div>
+         <label class="title">Plans to export</label>
+         <br><br>
+         <select name="" id="select_plans" {{data.plans_to_export}}>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+            <option value="2">Exporting</option>
+         </select>
+      </div>
+      
+      <div>
+         <label class="title">Export variation</label>         
+         <div>
+            <label class="variation arrow" id="down_variation_long">&#10229;</label>
+            <label class="variation arrow" id="down_variation">&#8672;</label>
+            <label class="main" id="variation">{{data.export_variation}}</label>
+            <label class="variation arrow" id="up_variation">&#8674;</label>
+            <label class="variation arrow" id="up_variation_long">&#10230;</label>
+         </div>
+         <label class="main" id="zero_variation">Zero</label>
+      </div>
+
+      <div>
+         <label class="title">Foreign investment</label>
+         <br><br>
+         <select name="" id="select_investment" value="{{data.foreign_investment}}">
+            <option value="0">No</option>
+            <option value="1">Yes</option>            
+         </select>
+      </div>
+   </div>
+
+   <hr>
+
+
+   <!-- --- Main products --- -->
+   <div id="div_main_products_title">
+      <label>Main products</label>
+   </div>
+
+   <div id="div_main_products">
+      <div>
+         <label for="input_product">Product name</label>
+         <label for="input_percentage">Percentage of<br>the bussines</label>
+
+         <input id="input_product" maxlength='19' type="text">
+         <input style="text-align:center" id="input_percentage" disabled type="text" value="0">
+         <button id="add_product">Add</button>
+
+         <div id="change_percentage">
+            <label id="down_percentage" class="arrow" data-id="input_percentage">&#10229;</label>
+            <label id="zero_percentage" class="zero">Zero</label>
+            <label id="up_percentage" class="arrow" data-id="input_percentage">&#10230;</label>
+         </div>         
+      </div>
+
+      <div>
+         <table>
+            <thead>               
+               <tr>
+                  <th style="width:60%">Product name (maximum three)</th>
+                  <th style="width:20%; text-align:center">Percentage</th>
+                  <th style="width:20%; text-align:center">Action</th>               
+               </tr>               
+            </thead>
+
+            <tbody id="tbody_products">
+               {% for product in products %}
+                  <tr>
+                     <td>{{product.product}}</td>
+                     <td style='text-align:center'>{{product.percentage}}</td>
+                     <td style='text-align:center' class="remove_row">Remove</td>
+                  </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+   </div>
+
+   <hr>
+
+
+   <!-- --- Main responsible --- -->
+   <div id="div_main_responsible_title">
+      <label>Main responsible</label>
+   </div>
+
+   <div id="div_main_responsible">
+      <div>
+         <label for="select_gender">Gender</label>
+         <label for="select_title">Title</label>
+         <label for="input_telephone">Telephone</label>         
+
+         <select id="select_gender" value="{{data.gender}}">
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+         </select>
+
+         <select id="select_title" value="{{data.ceo_title}}">
+            <option value="1">Mr.</option>
+            <option value="2">Mrs.</option>
+            <option value="3">Ms.</option>
+         </select>
+
+         <input type="text" id="input_telephone" maxlength='12' value="{{data.telephone}}">         
+      </div>
+
+      <div id="div_given_name">
+         <label for="input_given_name">Given name</label>         
+         <input type="text" id="input_given_name" maxlength='100' value="{{data.given_name}}">
+
+         <label for="input_family_name">Family name</label>         
+         <input type="text" id="input_family_name" maxlength='100' value="{{data.family_name}}">
+         
+         <label for="input_email">Email</label>         
+         <input type="text" id="input_email" maxlength='100' value="{{data.email}}">
+      </div>
+
+      <div id="div_bussines">
+         <div>
+            <label for="input_bussines_position">Bussines position</label>
+            <input type="text" id="input_bussines_position" maxlength="34" value="{{data.bussines_position}}">
+         </div>
+         
+         <div>
+            <label id="label_years_title">Years in the post</label>
+            <label id="label_years_post">{{data.years_in_the_post}}</label>
+            <label id="down_long_years" class="variation arrow down_long" data-id="label_years_post">&#10229;</label>
+            <label id="down_years" class="variation arrow down" data-id="label_years_post">&#8672;</label>
+            <label class="zero" id="zero_years_post" data-id="label_years_post">Zero</label>
+            <label id="up_years" class="variation arrow up" data-id="label_years_post">&#8674;</label>
+            <label id="up_long_years" class="variation arrow up_long" data-id="label_years_post">&#10230;</label>
+         </div>
+      </div>
+   </div>
+   
+   <hr>
+
+
+   <!-- --- Div employees --- -->
+   <div id="div_employees_title">
+      <label>Employees</label>
+   </div>
+
+   <div id="div_employees">
+      <div>
+         <label class="title">Average years<br>in the post</label>   
+         <div>
+            <label class="exporting arrow down_long" data-id="average">&#10229;</label>
+            <label class="exporting arrow down" data-id="average">&#8672;</label>
+            <label class="main" id="average">{{data.average_years}}</label>
+            <label class="exporting arrow up" data-id="average">&#8674;</label>
+            <label class="exporting arrow up_long" data-id="average">&#10230;</label>
+         </div>       
+         <label class="main zero" data-id="average" id="zero_average">Zero</label>
+      </div>      
+
+      <div>
+         <label class="title">Employees in top or middle<br>of management positions</label>   
+         <div>
+            <label class="exporting arrow down_long" data-id="top_middle">&#10229;</label>
+            <label class="exporting arrow down" data-id="top_middle">&#8672;</label>
+            <label class="main" id="top_middle">{{data.top_or_middle}}</label>
+            <label class="exporting arrow up" data-id="top_middle">&#8674;</label>
+            <label class="exporting arrow up_long" data-id="top_middle">&#10230;</label>
+         </div>       
+         <label class="main zero" data-id="top_middle" id="zero_top">Zero</label>
+      </div>      
+
+      <div>
+         <label class="title">Women<br>employed</label>   
+         <div>
+            <label class="exporting arrow down_long" data-id="women">&#10229;</label>
+            <label class="exporting arrow down" data-id="women">&#8672;</label>
+            <label class="main" id="women">{{data.women_employed}}</label>
+            <label class="exporting arrow up" data-id="women">&#8674;</label>
+            <label class="exporting arrow up_long" data-id="women">&#10230;</label>
+         </div>       
+         <label class="main zero" data-id="women">Zero</label>
+      </div>      
+
+      <div>
+         <label class="title">Women in top or middle<br>of management positions</label>   
+         <div>
+            <label class="exporting arrow down_long" data-id="women_top">&#10229;</label>
+            <label class="exporting arrow down" data-id="women_top">&#8672;</label>
+            <label class="main" id="women_top">{{data.women_top_or_middle}}</label>
+            <label class="exporting arrow up" data-id="women_top">&#8674;</label>
+            <label class="exporting arrow up_long" data-id="women_top">&#10230;</label>
+         </div>       
+         <label class="main zero" data-id="women_top" id="zero_average">Zero</label>
+      </div>      
+   </div>
+
+   <hr>
+
+
+   <!-- --- Comments --- -->
+   <div id="div_comments_title">
+      <label for="txt_comments">Comments</label>
+   </div>
+
+   <div id="div_comments">      
+      <textarea id="txt_comments" maxlength="255">{{data.given_name}}</textarea>
+   </div>
+
+
+
+   
+   <!-- --- Scripts --- -->
+   <script src="{% static 'js/jquery.js' %}"></script>
+   <script src="{% static 'js/in_progress_data.js' %}"></script>
+   
+
+
+   <!-- --- Hidden data and product tables --- -->
+   <table hidden>
+      <tbody id="body_hidden_data">
+         <tr>
+            <td>{{data.years_exporting}}</td>
+            <td>{{data.plans_to_export}}</td>
+            <td>{{data.export_variation}}</td>
+            <td>{{data.foreign_investment}}</td>
+            <td>{{data.average_years}}</td>
+            <td>{{data.top_or_middle}}</td>
+            <td>{{data.women_employed}}</td>
+            <td>{{data.women_top_or_middle}}</td>
+            <td>{{data.ceo_title}}</td>
+            <td>{{data.given_name}}</td>
+            <td>{{data.family_name}}</td>
+            <td>{{data.gender}}</td>
+            <td>{{data.telephone}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.bussines_position}}</td>
+            <td>{{data.years_in_the_post}}</td>
+            <td>{{data.comments}}</td>
+         </tr>
+      </tbody>
+   </table>
+
+   <table hidden>
+      <tbody id="body_hidden_products">
+         {% for product in products %}
+            <tr>
+               <td>{{product.product}}</td>
+               <td>{{product.percentage}}</td>
+            </tr>            
+         {% endfor %}
+      </tbody>
+   </table>
+   
+{% endblock body %}
+
+
+
+
+
+
+
+
+
+
+
+

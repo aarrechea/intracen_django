@@ -1,0 +1,90 @@
+/* ----- General styles ----- */
+.hr_finalize_modal {
+   width: 30%;
+   border: 1.5px solid yellowgreen;
+   margin: 0 auto;}
+
+
+
+
+/* ----- Finalize modal ----- */
+#div_modal_finalize {   
+   display: none;
+   position: fixed; /* Stay in place */
+   z-index: 1; /* Sit on top */
+   left: 0;
+   top: 0;
+   width: 100%; /* Full width */
+   height: 100%; /* Full height */
+   overflow: auto; /* Enable scroll if needed */   
+   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */}
+
+
+
+
+/* ----- Finalize content ----- */   
+#div_modal_finalize_content {
+   display: grid;
+   grid-template-columns: 1fr;
+   grid-template-rows: 40% 5% 25% 5% 25%;
+   justify-content: center;
+   align-items: center;
+   width: 50%;
+   height: 25rem;
+   margin: 12rem auto 0 auto;
+   font-size: 1.2rem;
+   border-radius: 3%;
+   background-color: white;}
+
+   #div_modal_finalize_content div:nth-child(1) {
+      display: grid;
+      grid-template-columns: 20% 80%;
+      grid-template-rows: repeat(2, 1fr);
+      justify-content: center;
+      align-items: center;
+      row-gap: 1rem;
+      margin: 1rem auto 0 auto;      
+      width: 95%;}
+
+      #div_modal_finalize_content div:nth-child(1) input {
+         width: 95%;
+         height: 1.8rem;
+         border: none;         
+         background-color: white;
+         font-size: 1.2rem;
+         padding: 0.5rem;}
+
+   #div_modal_finalize_content div:nth-child(3) {
+      display: block;
+      margin: 0 auto;
+      width: 95%;
+      font-size: 1.3rem;
+      text-align: center;}
+
+      #div_modal_finalize_content div:nth-child(3) span {
+         font-size: 1.1rem;}
+
+   #div_modal_finalize_content div:nth-child(5) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      width: 30%;
+      margin: 0 auto;}
+
+      #div_modal_finalize_content div:nth-child(5) button {
+         width: 8rem;
+         height: 3rem;
+         border: none;
+         font-size: 1.3rem;
+         background-color: white;}
+
+         #div_modal_finalize_content div:nth-child(5) button:hover {
+            font-size: 1.4rem;
+            font-weight: bold;
+            cursor: pointer;}
+
+            #div_modal_finalize_content div:nth-child(5) button:nth-child(2):hover {
+               color: red}
+
+
+
+

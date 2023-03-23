@@ -1,0 +1,185 @@
+<!-- ----- Imports ----- -->
+{% extends 'general/base.html' %}
+{% load static %}
+{% load mathfilters %}
+
+
+
+
+<!-- ----- Block title ----- -->
+{% block title %}{{element}}{% endblock title %}
+
+
+<!-- ----- Block styles ----- -->
+{% block styles %}
+   <link rel="stylesheet" href="{% static 'css/evaluation_list.css' %}">   
+{% endblock styles %}
+
+
+<!-- ----- Block content ----- -->
+{% block content %}
+   <!-- ----- Messages ----- -->
+   {% if messages %}
+      <ul hidden id="ul_messages">
+         {% for message in messages %}
+            <li class="message">{{message}}</li>
+         {% endfor %}
+      </ul>   
+   {% endif %}
+
+
+   <!-- ----- Includes ----- -->
+   {% include 'delete.html' %}
+   {% include 'finalize_modal.html' %}
+
+
+   <!-- ----- Div title ----- -->
+   <div id="div_title">
+      <h1>Evaluations list</h1>
+   </div>
+
+   
+   <!-- ----- Evaluation list ----- -->
+   {% if evaluation_list|length == 0 %}
+      <div id="div_empty_list">
+         <h2>There is no evaluations yet</h2>
+      </div>      
+   {% else %}
+      <div id="div_evaluations_table">
+         <table>
+            <thead>
+               <tr>
+                  <th style="width:24%">Company</th>
+                  <th style="width:24%">Relation name</th>
+                  <th style="width:7%">Total<br>processes</th>
+                  <th style="width:8%">Processes<br>evaluated</th>
+                  <th style="width:8%">Finalized</th>
+                  <th style="width:8%">Score</th>
+                  <th style="width:21%" colspan='3'>Actions</th>
+               </tr>
+            </thead>
+
+            <tbody id="body_evaluations_table">
+               {% for evaluation in evaluation_list %}
+                  <tr>
+                     <td>{{evaluation.company.name}}</td> <!-- 0 -->
+                     <td>{{evaluation.relation.name}}</td>
+                     <td style="text-align:center">{{evaluation.relation.total_processes}}</td>
+                     <td style="text-align:center">{{evaluation.processes_evaluated}}</td> <!-- 3 -->
+                     <td style="text-align:center">
+                        {% if evaluation.finalized == 0 %}No{% else %}Yes{% endif %}
+                     </td> <!-- 4 -->
+                     <td style="text-align:center">{{evaluation.score|mul:100}}%</td>
+
+                     {% if evaluation.finalized == 0 %} <!-- 6 -->
+                        <td style="text-align:center; width:7%">
+                           <a class="continue" href="{% url 'evaluations:continue' evaluation.id %}">Continue</a>
+                        </td>
+                     {% else %}
+                        <td style="text-align:center; width:7%; font-style:italic">Continue</td>
+                     {% endif %}
+
+                     {% if evaluation.relation.total_processes == evaluation.processes_evaluated and evaluation.finalized == 0 %}
+                        <td style="text-align:center; width:7%" class="finalize">Finalize</td>
+                     {% else %}
+                        <td style="text-align:center; width:7%; font-style:italic">Finalize</td>
+                     {% endif %} <!-- 7 -->
+                     
+                     {% if evaluation.finalized == 0 %} <!-- 8 -->
+                        <td style="text-align:center; width:7%" class="delete_eva" data-id="{{evaluation.id}}">Delete</td>
+                     {% else %}
+                        <td style="text-align:center; width:7%; font-style:italic">Delete</td>
+                     {% endif %}
+                                          
+                     <td hidden>{{evaluation.company.id}}</td>
+                     <td hidden>{{evaluation.relation.id}}</td> <!-- 10 -->
+                     <td hidden>{{evaluation.id}}</td> <!-- 11 -->
+                  </tr>
+               {% endfor %}               
+            </tbody>
+         </table>
+      </div>
+   {% endif %}     
+   
+   
+   <!-- ----- Create new evaluation ----- -->
+   <div id="div_new_evaluation_title">
+      <h1>Create new evaluation<br><span>Select a company and a relation to create a new evaluation</span></h1>
+   </div>
+
+   <div id="div_new_evaluation_button">
+      <label id="label_create">Create</label>
+   </div>
+
+   <div id="div_new_evaluation_elements">
+      <div>
+         <table>
+            <thead>
+               <tr>
+                  <th style="width:90%; text-align:center">Companies</th>
+                  <th style="width:10%; text-align:center">Select<br>company</th>
+               </tr>               
+            </thead>   
+
+            <tbody id="body_companies_table">
+               {% for company in companies %}
+                  <tr class="tr_company">
+                     <td>{{company.name}}</td>
+                     <td style="text-align:center">
+                        <input type="radio" name="radio_company" class="radio_company">
+                     </td>
+                     <td hidden>{{company.id}}</td>
+                  </tr>                  
+               {% endfor %}                  
+            </tbody>            
+         </table>
+      </div>
+
+      <div>
+         <table>
+            <thead>
+               <tr>
+                  <th style="width:90%; text-align:center">Relations</th>
+                  <th style="width:10%; text-align:center">Select<br>relation</th>
+               </tr>               
+            </thead>   
+
+            <tbody id="body_relations_table">
+               {% for relation in relations %}
+                  <tr class="tr_relation">
+                     <td>{{relation.name}}</td>
+                     <td style="text-align:center">
+                        <input type="radio" name="radio_relation" class="radio_relation">
+                     </td>
+                     <td hidden>{{relation.id}}</td>
+                  </tr>                  
+               {% endfor %}                  
+            </tbody>            
+         </table>
+      </div>
+   </div>
+
+
+   <!-- ----- Scripts ----- -->
+   <script src="{% static 'js/jquery.js' %}"></script>
+   <script src="{% static 'js/evaluation_list.js' %}"></script>   
+
+
+   <!-- ----- Hidden form to create ----- -->
+   <form hidden id="form_create" action="{% url 'evaluations:create' %}" method='POST'>
+      {% csrf_token %}
+
+      <input type="text" name="id_company" id="create_id_company">
+      <input type="text" name="id_relation" id="create_id_relation">
+   </form>
+
+
+   <!-- ----- Hidden form to delete ----- -->
+   <form hidden id="form_delete" action="{% url 'evaluations:delete' %}" method="POST">
+      {% csrf_token %}
+
+      <input type="text" name="id_eva" id="delete_id_eva">
+   </form>
+{% endblock %}
+
+

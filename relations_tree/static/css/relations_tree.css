@@ -1,0 +1,116 @@
+/* ----- Title ----- */
+#div_title {
+   display: grid;
+   grid-template-columns: 1fr;
+   grid-template-rows: 60% 40%;
+   justify-items: center;
+   align-items: center;
+   margin: 9rem auto 2rem auto;
+   width: 70%;
+   height: 5.5rem;
+}
+   #div_title a {      
+      font-size: 1.4rem;
+      text-decoration: none;
+      color: black;
+   }
+      #div_title a:hover {
+         font-size: 1.5rem;
+         font-weight: bold;
+         cursor: pointer;
+         color: rgba(56, 142, 60, 1);
+      }
+
+
+
+
+/* ----- Div table ----- */      
+#div_table {
+   display: grid;
+   grid-template-columns: 1fr;   
+   justify-items: center;
+   align-items: center;
+   margin: 1rem auto 2rem auto;
+   width: 70%;
+   max-height: 35rem;
+   overflow: auto;
+}
+   #div_table table {
+      width: 95%;
+      border-spacing: 0 0.5rem;
+      margin: 0 auto;            
+   }
+
+   #div_table thead {
+      height: 5rem;
+      padding: 0.5rem;
+   }
+
+   #div_table tbody tr {
+      height: 2.5rem;
+      font-size: 1.2rem;            
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+      border-radius: 3%;
+      background-color: rgba(56, 142, 60, 0.02);
+   }
+      #div_table tbody tr:hover {         
+         background-color: rgba(56, 142, 60, 0.1);
+      }
+         #div_table tr td:nth-child(n+9):hover {
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.1rem;
+         }
+
+         #div_table tr td:nth-child(11):hover {
+            color: red;
+         }
+
+   #div_table td:nth-child(1) {      
+      padding: 0.5rem;
+   }
+
+   #div_table table a {
+      text-decoration: none;
+      color: black;
+   }
+
+   
+   /* ----- Scrollbar configuration ----- */      
+::-webkit-scrollbar {
+   width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+   background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+   background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+   background: #555;
+}   
+
+
+
+
+
+
+      
+
+      
+
+   
+
+
+
+
+
+
+
+

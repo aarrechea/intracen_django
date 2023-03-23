@@ -1,0 +1,67 @@
+<!-- ----- Imports ----- -->
+{% load static %}
+
+
+
+<!-- ----- Html ----- -->
+<!DOCTYPE html>
+<html lang="en">
+   <!-- ----- Head ----- -->
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{% static 'css/menu_in_progress.css' %}">
+      <link rel="stylesheet" href="{% static 'css/in_progress_process.css' %}">
+      <link rel="stylesheet" href="{% static 'css/finalize_modal.css' %}">      
+      <title>Evaluation</title>
+      {% block head %}{% endblock head %}
+   </head>
+
+
+
+   <!-- ----- Body ----- -->
+   <body>
+      <div id="div_fixed_bar">
+         <div id="div_bar">
+            <label id="label_company_name">{{company}}</label>
+            <label id="label_relation_name">{{relation.name}}</label>
+            
+            <div id="div_buttons_menu_in_progress">
+               {% if form == 1 %}                  
+                  <a class="change" href="{% url 'evaluations:continue' id_eva %}">Back to<br>data</a>
+                  <label>- - -</label>
+               {% else %}
+                  <label id="previous_process" class="change">Previous<br>process</label>
+                  <label id="previous_capability" class="change">Previous<br>capability</label>
+               {% endif %}
+
+               <a class="change" href="{% url 'evaluations:evaluations' %}">Back to<br>evaluations</a>
+                              
+               <div id="div_labels_count_elements">
+                  <label id="label_count_competences">Competence 100 of 100</label>
+                  <label id="label_count_capabilities">Capability 100 of 100</label>
+                  <label id="label_count_processes">Process 100 of 100</label>
+               </div>
+               
+               <label id="label_save_score" class="change">Save</label>
+               <label id="next_capability" class="change">Next<br>capability</label>
+               <label id="next_process" class="change">Next<br>process</label>
+            </div>            
+         </div>
+      </div>
+
+
+
+      <!-- ----- Body block ----- -->
+      {% block body %}{% endblock body %}
+
+
+      <!-- ----- Scripts ----- -->
+      <script src="{% static 'js/jquery.js' %}"></script>
+      <script src="{% static 'js/in_progress_process.js' %}"></script>
+      <script src="{% static 'js/menu_in_progress.js' %}"></script>            
+   </body>
+</html>
+
+

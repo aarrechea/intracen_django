@@ -1,0 +1,65 @@
+/* --- Div modal delete --- */
+#div_modal_delete {   
+   display: none; /* Hidden by default */
+   position: fixed; /* Stay in place */
+   z-index: 1; /* Sit on top */
+   left: 0;
+   top: 0;
+   width: 100%; /* Full width */
+   height: 100%; /* Full height */
+   overflow: auto; /* Enable scroll if needed */   
+   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */}
+
+
+
+/* --- Div modal content --- */
+#div_modal_content {
+   display: grid;
+   grid-template-columns: 1fr;
+   grid-template-rows: 40% 5% 30% 5% 20%;
+   justify-items: center;
+   align-items: center;
+   width: 45rem;
+   height: 20rem;
+   margin: 10rem auto 0 auto;
+   border-radius: 2%;
+   padding: 1rem;
+   background-color: white;}
+
+   #div_modal_content div {
+      font-size: 1.4rem;
+      text-align: center;}      
+
+      #div_modal_content div:nth-child(5) {
+         display: grid;
+         grid-template-columns: repeat(2, 1fr);
+         justify-content: center;
+         align-items: center;
+         width: 30%;
+         height: 100%;
+         margin: 0 auto;
+      }
+
+#label_close_delete:hover {
+   font-size: 1.5rem;
+   cursor: pointer;
+   font-weight: bold;}
+
+#label_delete_delete:hover {
+   font-size: 1.5rem;
+   cursor: pointer;
+   color: red;
+   font-weight: bold;}
+
+hr {
+   width: 50%;
+   border: 1px solid red;}
+
+
+
+
+
+
+
+
+

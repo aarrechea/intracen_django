@@ -1,0 +1,236 @@
+<!-- ----- Imports ----- -->
+{% load static %}
+
+
+
+
+<!-- ----- Html ----- -->
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{% static 'css/change_relation.css' %}">
+      <title>{{title}}</title>
+   </head>
+
+
+   <body>
+      <!-- Title bar -->
+      <div id="div_sticky">
+         <div id="div_title">
+            <h1 id="h1_title" data-id='{{id_relation}}'>{{title}}</h1>
+            <a href="{% url 'relations:relations' %}">Back</a>
+            {% if title == 'Add relation'  %}
+               <button id="create_relation">Create<br/>relation</button>
+            {% else %}
+               <button id="create_relation">Edit<br/>relation</button>
+            {% endif %}            
+         </div>
+      </div>
+
+
+      <!-- Middle div -->
+      <div id="div_middle">
+         <div id="div_type_selector">
+            <label class="label_selector" data-element="competences" id="label_selector_one">Competences</label>
+            <label class="label_selector" data-element="capabilities">Capabilities</label>
+            <label class="label_selector" data-element="processes">Processes</label>
+            <label hidden id="hidden_label_selector">competences</label>
+         </div>
+
+         <div id="div_extras">
+            <select id="select_letters">               
+            </select>
+         </div>
+            
+         <div id="div_select_row">
+            <h3>Insert after row</h3>
+
+            <select id="select_row" style="width:5rem">
+               <option>0</option>
+            </select>            
+         </div>                     
+      </div>
+      
+
+      <!-- Table with the elements to create the relation -->
+      <div id="div_table">
+         <table>
+            <tbody id='body'>
+            </tbody>
+         </table>
+      </div>
+
+
+      <!-- ----- New relation ----- -->
+      <div id="div_new_relation_title">
+         <h1>New relation table</h1>
+
+         <h4 id="remove_all_elements">Remove all<br>elements</h4>
+      </div>
+
+      <div id="div_new_table">
+         <table>
+            <thead>
+               <th style="width:6%; text-align:center">Order</th>
+               <th style="width:6%; text-align:center">Letter</th>
+               <th style="width:8%; text-align:center">Capability<br/>number</th>
+               <th style="width:8%; text-align:center">Process<br/>number</th>
+               <th style="width:58%; text-align:center">Name</th>
+               <th style="width:6%; text-align:center">%</th>
+               <th style="width:8%; text-align:center">Action</th>                   
+            </thead>
+
+            <tbody id="body_new_relation"></tbody>
+         </table>
+      </div>
+
+
+      <!-- Label counter, Name, and comments -->
+      <div id="div_label_counter">
+         <label id="label_counter">255</label>
+      </div>
+      
+      <div id="div_name_comments">                  
+         <div id="div_name">
+            <label for="txt_name">Name&nbsp;&nbsp;<span id="name_span_counter"></span></label>
+            <textarea class='add_info' id="txt_name" maxlength='150'></textarea>
+         </div>
+
+         <div id="div_comments">
+            <label for="txt_comments">Comments&nbsp;&nbsp;<span id="name_span_counter"></span></label>
+            <textarea class='add_info' id="txt_comments" maxlength='255'></textarea>
+         </div>
+      </div>
+
+                  
+      <!-- ----- scripts ----- -->
+      <script src="{% static 'js/jquery.js' %}"></script>      
+      <script src="{% static 'js/change_relation.js' %}"></script>
+
+
+      <!-- ----- Element hidden table ----- -->
+      <table hidden>
+         <tbody id="hidden_body">
+            {% for element in list %}
+               <tr>
+                  <td>{{element.id}}</td> <!-- 0 -->
+                  <td>{{element.type}}</td>
+                  <td>{{element.letter}}</td>
+                  <td>{{element.name}}</td> <!-- 3 -->
+                  <td>{{element.letter.id}}</td> 
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+
+      <!-- ----- Hidden table relations ----- -->
+      <table hidden>
+         <tbody id="body_relation">
+            {% for rel in list_relations %}
+               <tr>
+                  <td>{{rel.id}}</td>
+                  <td>{{rel.name}}</td>
+                  <td>{{rel.comments}}</td>   
+               </tr>               
+            {% endfor %}
+         </tbody>
+      </table>
+
+
+      <!-- ----- Hidden table relations comp ----- -->
+      <table hidden>
+         <tbody id="body_comp">
+            {% for element in list_comp %}
+               <tr>
+                  <td>{{element.original_letter}}</td> <!-- 0 -->
+                  <td>{{element.relation_letter}}</td>
+                  <td>{{element.percentage}}</td>
+                  <td>{{element.order}}</td> <!-- 3 -->
+                  <td>{{element.id_relation.id}}</td>
+                  <td>{{element.id_element.id}}</td>
+                  <td>{{element.id_element.name}}</td> <!-- 6 -->
+                  <td>{{element.relation_lettr.id}}</td> <!-- 7 -->
+                  <td>{{element.lettr.id}}</td> <!-- 8 -->
+               </tr>
+            {% endfor %}         
+         </tbody>
+      </table>
+
+
+      <!-- ----- Hidden table relations cap ----- -->
+      <table hidden>
+         <tbody id="body_cap">
+            {% for element in list_cap %}
+               <tr>               
+                  <td>{{element.number}}</td> <!-- 0 -->
+                  <td>{{element.percentage}}</td>
+                  <td>{{element.order}}</td>
+                  <td>{{element.id_relation.id}}</td> <!-- 3 -->
+                  <td>{{element.id_element.id}}</td>
+                  <td>{{element.id_element.name}}</td> <!-- 5 -->     
+                  <td>{{element.id_element.letter.id}}</td> <!-- 6 -->     
+                  <td>{{element.relation_letter.name}}</td> <!-- 7 -->    
+                  <td>{{element.relation_letter.id}}</td> <!-- 8 -->      
+                  <td>{{element.parent_element.id}}</td> <!-- 9 -->
+               </tr>
+            {% endfor %}         
+         </tbody>
+      </table>
+
+
+      <!-- ----- Hidden table relations pro ----- -->
+      <table hidden>
+         <tbody id="body_pro">
+            {% for element in list_pro %}
+               <tr>               
+                  <td>{{element.number}}</td> <!-- 0 -->
+                  <td>{{element.percentage}}</td>
+                  <td>{{element.order}}</td>
+                  <td>{{element.id_relation.id}}</td> <!-- 3 -->
+                  <td>{{element.id_element.id}}</td>
+                  <td>{{element.id_element.name}}</td> <!-- 5 -->     
+                  <td>{{element.id_element.letter.id}}</td> <!-- 6 -->     
+                  <td>{{element.relation_letter.name}}</td> <!-- 7 -->     
+                  <td>{{element.relation_letter.id}}</td> <!-- 8 -->     
+                  <td>{{element.parent_element.id}}</td> <!-- 9 -->
+               </tr>
+            {% endfor %}         
+         </tbody>
+      </table>
+
+
+      <!-- ----- Letters hidden table ----- -->
+      <table hidden>
+         <tbody id="hidden_letters">
+            {% for letter in letters %}
+               <tr>
+                  <td>{{letter.id}}</td> <!-- 0 -->
+                  <td>{{letter.letter_order}}</td>
+                  <td>{{letter.name}}</td>                  
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+
+      <!-- Hidden form to send the information to create a relation -->
+      <form hidden id="create_relation_form" action="{% url 'relations:change' action id_relation %}" method="POST">
+         {% csrf_token %}
+
+         <input id="input_data_form" type="text" name="input_data_form">
+         <input id="vector_comp_form" type="text" name="vector_comp_form">
+         <input id="vector_cap_form" type="text" name="vector_cap_form">
+         <input id="vector_pro_form" type="text" name="vector_pro_form">         
+      </form>
+   </body>
+</html>
+
+
+
+
+
+

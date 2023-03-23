@@ -1,0 +1,335 @@
+/* ----- Title ----- */
+#div_sticky {
+   position: fixed;
+   top: 0;
+   width: 100%;
+   height: 8.5rem;
+   background-color: white;
+}
+
+#div_title {
+   display: grid;
+   grid-template-columns: 60% 20% 20%;   
+   justify-items: center;
+   align-items: center;
+   margin: 0.5rem auto 1rem auto;
+   width: 30%;
+   height: 7rem;   
+}
+   #div_title h1 {
+      margin: 0;
+   }
+
+   #div_title div {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);   
+      justify-items: center;
+      align-items: center;          
+      width: 20%;      
+   }
+
+   #div_title a {
+      text-decoration: none;
+      color: black;
+      font-size: 1.4rem;
+      background-color: white;
+   }
+      #div_title a:hover {
+         cursor: pointer;
+         font-weight: bold;
+         font-size: 1.5rem;
+         color: rgba(56, 142, 60, 1);
+      }
+
+   #div_title button {
+      font-size: 1.3rem;
+      background-color: white;
+      border: none;
+   }
+      #div_title button:hover {
+         cursor: pointer;
+         font-weight: bold;
+         font-size: 1.4rem;
+         color: rgba(56, 142, 60, 1);
+      }
+
+
+
+
+/* ----- Div middle ----- */      
+#div_middle {
+   display: grid;
+   grid-template-columns: 50% 15% 35%;      
+   justify-items: center;
+   align-items: center;
+   margin: 8.5rem auto 1rem auto;
+   width: 55%;
+   height: 3rem;      
+}
+
+   /* ----- Type selector ----- */      
+#div_type_selector {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);      
+   justify-items: center;
+   align-items: center;
+   margin: 0rem auto 1rem auto;
+   width: 90%;
+   height: 3rem;   
+   border-top: 1px solid rgba(56, 142, 60, 1);
+   border-bottom: 1px solid rgba(56, 142, 60, 1);
+}
+   #div_type_selector {
+      font-size: 1.3rem;
+   }
+      #div_type_selector label:hover {
+         font-size: 1.4rem;
+         cursor: pointer;
+         color: rgba(56, 142, 60, 1);
+      }
+
+   /* ----- Extras ----- */      
+#div_extras {
+   display: grid;
+   grid-template-columns: 1fr; 
+   justify-items: center;
+   align-items: center;
+   margin: 0rem auto 1rem auto;
+   width: 70%;
+   height: 3rem;   
+   border-top: 1px solid rgba(56, 142, 60, 1);
+   border-bottom: 1px solid rgba(56, 142, 60, 1);
+}
+   #div_extras select {
+      width: 4rem;
+      height: 2.5rem;
+      background-color: white;
+      font-size: 1.2rem;
+      text-align: center;
+      border: none;
+   }
+
+   /* ----- Select row ----- */      
+#div_select_row {
+   display: grid;
+   grid-template-columns: 60% 40%; 
+   justify-items: center;
+   align-items: center;
+   margin: 0rem auto 1rem auto;
+   width: 75%;
+   height: 3rem;      
+   border-top: 1px solid rgba(56, 142, 60, 1);
+   border-bottom: 1px solid rgba(56, 142, 60, 1);
+}
+   #div_select_row select {
+      width: 4rem;
+      height: 2.5rem;
+      background-color: white;
+      font-size: 1.2rem;
+      text-align: center;
+      border: none;
+   }
+
+   #div_select_row h3 {
+      margin: 0;
+   }
+
+
+   
+   
+      
+
+/* ----- Table ----- */      
+#div_table {
+   display: grid;
+   grid-template-columns: 1fr;
+   justify-items: center;
+   align-items: center;
+   margin: 1rem auto 1rem auto;
+   max-width: 60%;
+   max-height: 17rem;      
+   overflow: auto;
+}   
+   #div_table table {
+      border-spacing: 0 0.5rem;
+      margin: 0 auto;      
+      width: 95%;
+   }   
+
+   /* width */
+   ::-webkit-scrollbar {
+      width: 10px;
+   }
+   
+   /* Track */
+   ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+   }
+   
+   /* Handle */
+   ::-webkit-scrollbar-thumb {
+      background: #888;
+   }
+   
+   /* Handle on hover */
+   ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+   }
+
+   #div_table tr {
+      height: 2.2rem;
+      font-size: 1.2rem;            
+      box-shadow: 1px 1px 8px rgba(56, 142, 60, 0.5);
+   }
+      #div_table tr:hover {
+         cursor: pointer;
+         background-color: rgba(56, 142, 60, 0.05);
+      }
+
+   #div_table td {      
+      padding: 0.3rem 0.3rem 0.3rem 1rem;
+   }
+      #div_table td:nth-child(0) {
+         text-align: center;         
+      }
+
+
+
+
+/* ----- New relation title ----- */
+#div_new_relation_title {
+   display: grid;
+   grid-template-columns: 90% 10%;
+   justify-items: center;
+   align-items: center;
+   margin: 3rem auto 1rem auto;
+   max-width: 68%;   
+}
+   #div_new_relation_title h1 {
+      margin: 0;
+   }
+
+   #div_new_relation_title h4 {
+      margin: 0;
+      text-align: center;
+   }
+      #div_new_relation_title h4:hover {
+         font-weight: bold;
+         cursor: pointer;
+         color: red;
+      }
+
+
+
+
+
+/* ----- New relation table ----- */
+#div_new_table {
+   display: grid;
+   grid-template-columns: 1fr;
+   justify-items: center;
+   align-items: center;
+   margin: 1rem auto 7rem auto;
+   max-width: 70%;   
+}
+   #div_new_table table {
+      width: 95%;
+   }
+
+   #div_new_table th {
+      border-bottom: 2px solid rgba(56, 142, 60, 1);
+   }
+
+
+
+
+/* ----- Div label counter ----- */            
+#div_label_counter {
+   display: grid;
+   grid-template-columns: 1fr;      
+   justify-items: center;
+   align-items: center;
+   margin: 1rem auto 1rem auto;
+   width: 10%;
+   height: 2rem;      
+}
+   #div_label_counter label {
+      font-size: 1.3rem;
+      visibility: hidden;
+   }
+
+
+
+
+/* ----- Div name and comments ----- */            
+#div_name_comments {
+   display: grid;
+   grid-template-columns: 40% 60%;      
+   justify-items: center;
+   align-items: center;
+   margin: 1rem auto 20rem auto;
+   width: 70%;
+   min-height: 5rem;      
+}
+   #div_name_comments label {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      margin-left: 1rem;
+   }
+
+   #div_name_comments textarea {
+      resize: none;
+      font-size: 1.2rem;
+      padding: 1rem;
+      width: 95%;
+      border: none;
+      border-left: 2px solid rgba(56, 142, 60, 1);
+      background-color: white;
+      height: 2rem;
+   }
+
+   /* ----- Div name ----- */            
+#div_name {
+   width: 95%;
+}
+   #div_name textarea:focus {
+      height: 6rem;
+      border-radius: 3%;
+      border: none;
+   }
+
+/* ----- Div comments ----- */            
+#div_comments {
+   width: 95%;
+}
+   #div_comments textarea:focus {
+      height: 10rem;
+      border-radius: 3%;
+      border: none;
+   }   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,101 @@
+/* ----- Div fixed bar ----- */
+#div_fixed_bar {
+   display: grid;   
+   grid-template-columns: 1fr;
+   width: 100%;
+   justify-items: center;
+   align-items: center;
+   height: 10rem;
+   margin: 0 auto;
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 1;
+   background-color: white;}
+
+
+
+
+/* ----- Div bar ----- */
+#div_bar {
+   display: grid;   
+   grid-template-columns: 1fr;
+   grid-template-rows: 20% 20% 60%;
+   width: 70%;
+   justify-items: center;
+   align-items: center;
+   height: 100%;
+   margin: 0 auto;
+   border-radius: 0 0 3% 3%;
+   background-color: #ffd280;}
+
+   #div_bar label {
+      text-align: center;}
+
+   #div_bar > label {
+      display: block;
+      font-size: 1.2rem;}
+
+   #div_bar > div {
+      display: grid;   
+      grid-template-columns: 8% 8% 20% 28% 20% 8% 8%;
+      width: 100%;
+      justify-items: center;
+      align-items: center;            
+      margin: 0 auto;}
+
+      #div_bar div a {
+         text-decoration: none;
+         text-align: center;
+         color: black;
+         font-size: 1.2rem;}
+
+      #div_bar div label {
+         font-size: 1.2rem;}
+
+      #div_bar div div {
+         display: grid;
+         grid-template-columns: 1fr;
+         grid-template-rows: repeat(3, 1fr);
+         margin: 0 auto;
+         justify-content: center;
+         align-items: center;
+         width: 100%;
+         height: 100%;}
+
+      #div_bar div div label {
+         padding: 0.15rem;
+         font-size: 1.1rem;
+         display: block;}
+
+
+
+
+/* --- Previous and next labels */      
+.change:hover {
+   font-weight: bold;
+   cursor: pointer;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

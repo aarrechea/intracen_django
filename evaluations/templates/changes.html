@@ -1,0 +1,38 @@
+<!-- --- Imports --- -->
+{% load static %}
+
+
+<!-- --- Html --- -->
+<!DOCTYPE html>
+<html lang="en">
+   <!-- --- Head --- -->
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{% static 'css/changes.css' %}">
+   </head>
+
+
+   <!-- --- Body --- -->
+   <body>
+      <div id="div_modal_changes">
+         <input hidden type="text" id="input_changes_action">
+
+         <div id="div_modal_changes_content">
+            <div>
+               <label>Do you want to save changes?</label>
+            </div>
+            
+            <div id="div_changes_buttons">
+               <label id="label_cancel_changes">Cancel</label>
+            </div>
+         </div>
+      </div>  
+      
+
+      <!-- --- Scripts --- -->
+      <script src="{% static 'js/jquery.js' %}"></script>
+      <script src="{% static 'js/changes.js' %}"></script>
+   </body>
+</html>

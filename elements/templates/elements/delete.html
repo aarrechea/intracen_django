@@ -1,0 +1,64 @@
+<!-- ----- Imports ----- -->
+{% load static %}
+
+
+
+
+<!-- ----- Block styles ----- -->
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/delete.css' %}">
+{% endblock styles %}
+
+
+
+
+<!-- ----- Body ----- -->
+<body>
+    <div id="myModalDelete" class="modal-delete">
+        <form action="{% url 'elements:delete' %}" method="POST">
+            {% csrf_token %}
+    
+            <div class="modal-content-delete">
+                <div id="modal-content-title-delete">
+                    <label id="labelHeaderDelete"></label>
+                    <span id="close-delete">&times;</span>                    
+                </div>
+        
+                <div id="modal-content-competence-delete">
+                    <p id="mensajeDelete"></p>
+                </div>
+        
+                <div id="modal-content-buttons-delete">                    
+                    <input type="button" value="Close" id="btn-close-delete">
+                    <input type='submit' value="Delete">                    
+                </div>
+            </div>
+            
+            <input hidden type="text" name="id" id="id_element">
+        </form>
+    </div>    
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

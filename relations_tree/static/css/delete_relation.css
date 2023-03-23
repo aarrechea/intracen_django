@@ -1,0 +1,108 @@
+/* ----- Div modal ----- */
+#div_modal_delete {
+   display: none; /* Hidden by default */
+   position: fixed; /* Stay in place */
+   z-index: 1; /* Sit on top */
+   left: 0;
+   top: 0;
+   width: 100%; /* Full width */
+   height: 100%; /* Full height */
+   overflow: auto; /* Enable scroll if needed */
+   background-color: rgb(0,0,0); /* Fallback color */
+   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+ }
+
+
+
+
+ /* ----- Modal Content ----- */
+ #div_modal_content_delete {
+   display: grid;
+   grid-template-columns: 1fr;
+   grid-template-rows: repeat(3, 1fr);
+   row-gap: 1rem;
+   width: 50%;  
+   height: 25rem;   
+   padding: 1rem;    
+   margin: 4rem auto;
+   text-align: center;
+   background-color: rgba(248, 249, 249, 1);   
+}
+
+
+
+
+/* ----- Modal title bar ----- */
+#div_modal_title_bar_delete {
+   display: grid;
+   grid-template-columns: 95% 5%;
+   align-items: center;
+   justify-content: center;
+   width: 95%;     
+   padding: 1rem;      
+   margin: 0 auto;   
+   border-bottom: 3px solid red;
+}
+   
+#h1_relation_name_delete {
+   text-align: left;
+}   
+   
+.close_modal_delete {   
+   font-size: 2.5rem;
+}
+   .close_modal_delete:hover {
+      font-size: 3rem;
+      color: rgba(56, 142, 60, 1);
+      cursor: pointer;
+   }
+
+
+
+
+/* ----- Div relation ----- */
+#div_relation_delete {
+   margin: 0 auto;
+   padding: 1rem;
+   text-align: center;
+   border-bottom: 2px solid red;
+}
+   
+
+
+
+/* ----- Div relation buttons ----- */
+#div_form_delete {
+   padding: 1.5rem;
+}
+   #div_form_delete input {
+      width: 5rem;
+      height: 3rem;
+      text-decoration: none;
+      background-color: rgba(248, 249, 249, 1);
+      color: black;
+      margin-right: 2rem;
+      border: none;
+      font-size: 1.2rem;
+   }
+      #div_form_delete input:hover {
+         font-weight: bold;
+         cursor: pointer;
+         font-size: 1.3rem;
+      }
+         #div_form_delete input[type='submit']:hover {
+            color: red;
+         }
+
+
+
+
+
+
+
+
+
+
+
+
+

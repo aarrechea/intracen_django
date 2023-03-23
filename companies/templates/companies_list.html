@@ -1,0 +1,164 @@
+<!-- ----- Imports ----- -->
+{% extends 'general/base.html' %}
+{% load static %}
+
+
+<!-- ----- Block title ----- -->
+{% block title %}{{element}}{% endblock title %}
+
+
+<!-- ----- Block styles ----- -->
+{% block styles %}
+   <link rel="stylesheet" href="{% static 'css/companies_list.css' %}">
+   <link rel="stylesheet" href="{% static 'css/add_info_company.css' %}">
+{% endblock styles %}
+
+
+<!-- ----- Block content ----- -->
+{% block content %}
+   <!-- ----- Messages ----- -->
+   {% if messages %}
+      {% for message in messages %}
+         <ul hidden class="messages">
+            <li>{{message}}</li>
+         </ul>         
+      {% endfor %}         
+   {% endif %}
+
+
+   <!-- ----- Modal additional info ----- -->
+   {% include 'add_info_company.html' %}
+
+
+   <!-- ----- Div title ----- -->
+   <div id="div_title">
+      <h1>Companies</h1>
+      <a href="{% url 'companies:add' 'add' %}">Add company</a>
+   </div>
+
+   
+   <!-- ----- Companies list ----- -->
+   {% if companies_list|length == 0 %}
+      <div id="div_empty_list">
+         <h2>There is no companies yet</h2>
+      </div>      
+   {% else %}
+      <div id="div_companies_table">
+         <table>
+            <thead>
+               <tr>
+                  <th style="width:27%">Name</th>
+                  <th style="width:27%">Country</th>                  
+                  <th style="width:8%">Evaluations<br>made</th>
+                  <th style="width:8%">Evaluations<br>in progress</th>                  
+                  <th style="width:30%" colspan='3'>Actions</th>
+               </tr>
+            </thead>
+
+            <tbody id="body_companies_table">
+               {% for company in companies_list %}
+                  <tr>
+                     <td>{{company.name}}</td> <!-- 0 -->
+                     <td>{{company.country.name}}</td>                                    
+                     <td style="text-align:center">{{company.eva_made}}</td>
+                     <td style="text-align:center">{{company.eva_progress}}</td> <!-- 3 -->
+                     <td style="text-align:center; width:10%" class="information">
+                        More<br>information
+                     </td> <!-- 4 -->
+
+                     {% if company.eva_made > 0 or company.eva_progress > 0 %}
+                        <td style="text-align:center; width:10%; font-style:italic">Edit</td> <!-- 5 -->
+                        <td style="text-align:center; width:10% font-style:italic">Delete</td> <!-- 6 -->
+                     {% else %}
+                        <td style="text-align:center; width:10%" class="edit">
+                           <a href="{% url 'companies:add' 'edit' company.id %}">Edit</a>
+                        </td> <!-- 5 -->
+                        <td style="text-align:center; width:10%" class="delete">Delete</td> <!-- 6 -->
+                     {% endif %}
+                     
+                     <td hidden>{{company.address}}</td> <!-- 7 -->
+                     <td hidden>{{company.postal_code}}</td>                     
+                     <td hidden>{{company.city}}</td>
+                     <td hidden>{{company.year_establishment}}</td>  <!-- 10 -->
+                     <td hidden>{{company.year_first_expo}}</td> <!-- 11 -->                     
+                     <td hidden>{{company.bussines_description}}</td>
+                     <td hidden>{{company.subsector.id}}</td> <!-- 13 -->
+                     <td hidden>{{company.comments}}</td> <!-- 14 -->
+                     <td hidden>{{company.created|date:"M j Y"}}</td>
+                     <td hidden>{{company.updated|date:"M j Y"}}</td> <!-- 16 -->                     
+                  </tr>
+               {% endfor %}               
+            </tbody>
+         </table>
+      </div>
+   {% endif %}       
+   
+   
+   <!-- ----- Scripts ----- -->
+   <script src="{% static 'js/jquery.js' %}"></script>
+   <script src="{% static 'js/companies_list.js' %}"></script>
+
+
+   <!-- ----- Hidden industry related tables ----- -->
+   <table hidden>
+      <tbody id="body_industry_hidden">
+         {% for industry in industries %}
+            <tr>
+               <td>{{industry.id}}</td>
+               <td>{{industry.name}}</td>
+            </tr>
+         {% endfor %}
+      </tbody>      
+   </table>
+
+   <table hidden>
+      <tbody id="body_supersector_hidden">
+         {% for supersector in supersectors %}
+            <tr>
+               <td>{{supersector.id}}</td>
+               <td>{{supersector.name}}</td>
+               <td>{{supersector.industry.id}}</td>
+            </tr>
+         {% endfor %}
+      </tbody>
+      
+   </table>
+
+   <table hidden>
+      <tbody id="body_sector_hidden">
+         {% for sector in sectors %}
+            <tr>
+               <td>{{sector.id}}</td>
+               <td>{{sector.name}}</td>
+               <td>{{sector.supersector.id}}</td>
+            </tr>
+         {% endfor %}
+      </tbody>      
+   </table>
+   
+   <table hidden>
+      <tbody id="body_subsector_hidden">
+         {% for subsector in subsectors %}
+            <tr>
+               <td>{{subsector.id}}</td>
+               <td>{{subsector.name}}</td>
+               <td>{{subsector.sector.id}}</td>
+            </tr>
+         {% endfor %}
+      </tbody>      
+   </table>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

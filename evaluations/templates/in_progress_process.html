@@ -1,0 +1,214 @@
+{% extends 'menu_in_progress.html' %}
+
+
+
+{% block body %}
+<!-- Hidden inputs-->
+<input hidden id="input_form_number" type="text" value="{{form}}">
+<input hidden id="input_total_competences" type="text" value="{{relation.total_competences}}">
+<input hidden id="input_total_capabilities" type="text" value="{{relation.total_capabilities}}">
+<input hidden id="input_total_processes" type="text" value="{{relation.total_processes}}">
+<input hidden id="input_id_eva" type="text" value="{{id_eva}}">
+<input hidden id="input_id_actual_competence" type="text">
+<input hidden id="input_id_actual_capability" type="text">
+<input hidden id="input_id_actual_process" type="text">
+
+
+<!-- Main title-->
+<div id="div_main_title">
+   <label>Evaluation</label>
+</div>
+
+
+<!-- Elements-->
+<div id="div_elements">
+   <label id="label_name_competence"></label>
+   <label id="label_name_capability"></label>
+   <label id="label_name_process"></label>
+   <textarea disabled id="txt_definitions"></textarea>
+</div>
+
+<hr>
+
+<!-- --- Score and maturity scale --- -->
+<div id="div_score_title">
+   <label>Score</label>
+</div>
+
+<div id="div_score">
+   <label for="score_zero">--</label>
+   <label for="score_one">1</label>
+   <label for="score_two">2</label>
+   <label for="score_three">3</label>
+   <label for="score_four">4</label>
+   <label for="score_five">5</label>
+
+   <input type="radio" name="score" value="0" id="score_zero" class="score">
+   <input type="radio" name="score" value="1" id="score_one" class="score">
+   <input type="radio" name="score" value="2" id="score_two" class="score">
+   <input type="radio" name="score" value="3" id="score_three" class="score">
+   <input type="radio" name="score" value="4" id="score_four" class="score">
+   <input type="radio" name="score" value="5" id="score_five" class="score">
+</div>
+
+<div id="div_maturity_title">
+   <label>Maturity scale</label>
+</div>
+
+<div id="div_maturity_buttons">
+   <button class="button_maturity" data-id="down">&#10229;</button>
+   <label id="label_maturity">1</label>
+   <button class="button_maturity" data-id="up">&#10230;</button>
+</div>
+
+<div id="div_maturity_textarea">
+   <textarea id="txt_maturity" disabled></textarea>
+</div>
+
+
+
+
+<!-- --- Symptoms and sample questions --- -->
+<div id="div_symptoms_title">   
+   <label id="label_symptoms" class="label_symptoms_questions" data-id="symptoms">Symptoms</label>
+   <label id="label_questions" class="label_symptoms_questions" data-id="questions">Sample questions</label>
+</div>
+
+<div id="div_symptoms_textarea">
+   <textarea id="txt_symptoms" class="symptoms_questions" data-id="symptoms" disabled></textarea>
+   <textarea id="txt_questions" class="symptoms_questions" data-id="questions" disabled></textarea>
+</div>
+
+
+<hr style="margin-top: 8rem; margin-bottom:0">
+
+
+<!-- Hidden competence table-->
+<table hidden>   
+   <tbody id="body_hidden_competences">
+      {% for competence in competences %}
+         <tr>
+            <td>{{competence.relation_letter.name}}</td>
+            <td>{{competence.id_element.name}}</td>
+            <td>{{competence.id_element.id}}</td>
+            <td>{{competence.order}}</td>   
+            <td>competence</td>
+         </tr>
+      {% endfor %}
+   </tbody>   
+</table>
+
+<!-- Hidden capability table-->
+<table hidden>
+   <tbody id="body_hidden_capabilities">
+      {% for capability in capabilities %}
+         <tr>
+            <td>{{capability.number}}</td>
+            <td>{{capability.id_element.name}}</td>
+            <td>{{capability.id_element.id}}</td>
+            <td>{{capability.order}}</td>
+            <td>capability</td>
+         </tr>
+      {% endfor %}
+   </tbody>   
+</table>
+
+<!-- Hidden process table-->
+<table hidden>
+   <tbody id="body_hidden_processes">
+      {% for process in processes %}
+         <tr>
+            <td>{{process.number}}</td>
+            <td>{{process.id_element.name}}</td>
+            <td>{{process.id_element.id}}</td>
+            <td>{{process.order}}</td>
+            <td>process</td>
+         </tr>
+      {% endfor %}
+   </tbody>   
+</table>
+
+<!-- Hidden new table-->
+<table hidden><tbody id="body_new_table"></tbody></table>
+
+<!-- Hidden scores table-->
+<table hidden>
+   <tbody id="body_scores">
+      {% for score in scores %}
+         <tr>
+            <td>{{score.score}}</td>
+            <td>{{score.form_number}}</td>
+            <td>{{score.element.id}}</td>
+            <td>{{score.order}}</td>
+            <td>{{score.id_evaluation.id}}</td>
+         </tr>
+      {% endfor %}
+   </tbody>
+</table>
+
+<!-- Hidden relation comp table-->
+<table hidden>
+   <tbody id="body_relation_comp">
+      {% for comp in relation_comp %}
+         <tr>
+            <td>{{comp.percentage}}</td>
+            <td>{{comp.id_element.id}}</td>
+            <td>{{comp.order}}</td>
+         </tr>
+      {% endfor %}
+   </tbody>
+</table>
+
+<!-- Hidden relation cap table-->
+<table hidden>
+   <tbody id="body_relation_cap">
+      {% for cap in relation_cap %}
+         <tr>
+            <td>{{cap.percentage}}</td>
+            <td>{{cap.id_element.id}}</td>
+            <td>{{cap.order}}</td>
+         </tr>
+      {% endfor %}
+   </tbody>
+</table>
+
+<!-- Hidden relation pro table-->
+<table hidden>
+   <tbody id="body_relation_pro">
+      {% for pro in relation_pro %}
+         <tr>
+            <td>{{pro.percentage}}</td> <!-- 0 -->
+            <td>{{pro.id_element.id}}</td>
+            <td>{{pro.order}}</td> <!-- 2 -->
+            <td>{{pro.id_element.additionalinformation.definitions}}</td> <!-- 3 -->
+            <td>{{pro.id_element.additionalinformation.assess_one}}</td>
+            <td>{{pro.id_element.additionalinformation.assess_two}}</td>
+            <td>{{pro.id_element.additionalinformation.assess_three}}</td> <!-- 6 -->
+            <td>{{pro.id_element.additionalinformation.assess_four}}</td>
+            <td>{{pro.id_element.additionalinformation.assess_five}}</td> 
+            <td>{{pro.id_element.additionalinformation.symptoms}}</td> <!-- 9 -->
+            <td>{{pro.id_element.additionalinformation.questions}}</td>
+         </tr>
+      {% endfor %}
+   </tbody>
+</table>
+
+{% endblock body %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

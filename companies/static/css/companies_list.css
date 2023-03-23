@@ -1,0 +1,61 @@
+/* ----- Div title ----- */
+#div_title {
+   text-align: center;
+   margin: 9rem auto 0 auto;
+   height: 4.2rem;
+   padding: 0.5rem;
+   width: 70%;}
+
+   #div_title a {
+      font-size: 1.2rem;
+      text-decoration: none;
+      color: black;}
+
+      #div_title a:hover {
+         font-weight: bold;
+         color: rgba(56, 142, 60, 1);
+         cursor: pointer;}
+
+
+
+         
+/* ----- Div empty list ----- */
+#div_empty_list {
+   text-align: center;
+   margin-top: 6rem;}
+
+
+
+
+/* ----- Div companies table ----- */
+#div_companies_table {
+   display: grid;
+   grid-template-columns: 1fr;   
+   justify-items: center;
+   align-items: center;
+   margin: 1rem auto 2rem auto;
+   width: 70%;
+   max-height: 35rem;
+   overflow: auto;}
+
+   #div_companies_table tr td:nth-child(1) {
+      padding-left: 0.5rem;}
+   
+   #div_companies_table tbody a {
+         text-decoration: none;
+         border: none;
+         color: black;}
+
+.edit:hover, .delete:hover, .information:hover {
+   font-weight: bold;
+   cursor: pointer;
+   font-size: 1.1rem;}
+
+.delete:hover {
+   color:red}
+
+
+
+
+
+

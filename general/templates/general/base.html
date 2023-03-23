@@ -1,0 +1,58 @@
+<!-- ----- Imports ----- -->
+{% load static %}
+
+
+
+
+<!-- ----- Html ----- -->
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{% static 'css/styles.css' %}">      
+      <link rel="icon" href="data:,">
+      <title>{% block title %}{% endblock %}</title>      
+      {% block styles %}{% endblock %}
+   </head>
+
+
+   <!-- ----- Body ----- -->
+   <body>      
+      <div class="background_menu">
+         <div class="bar_menu">
+            <h2>ECCS</h2>
+
+            <div id="user_identification">
+               {% if user.is_authenticated  %}
+                  <h5 style="color:gray">User<br><h3>{{user.get_username}}</h3></h5>
+               {% else %}
+                  <h5 style="color:gray">User<br><h3>Anonymous</h3></h5>                  
+               {% endif %}
+            </div>
+            
+            <div>
+               {% if title %}            
+                  <h5 style="color:grey">Menu<h3>{{element}}</h3></h5>
+               {% else %}
+                  <h5 style="color:grey">Menu<h3 id="title">Relations tree</h3></h5>                  
+               {% endif %}        
+            </div>            
+         </div>
+      </div>         
+      
+      <div id="div_include_general_menu">
+         {% include 'general/menu_dba.html' %}
+      </div>
+         
+            
+      {% block content %}{% endblock content %}
+
+
+      <!-- ----- Scripts ----- -->
+      <script src="{% static 'js/jquery.js' %}"></script>
+      <script src="{% static 'js/base.js' %}"></script>
+      {% block scripts %}{% endblock scripts %}      
+   </body>
+</html>

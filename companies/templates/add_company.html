@@ -1,0 +1,143 @@
+<!-- ----- Imports ----- -->
+{% load static %}
+
+
+<!-- ----- Html ----- -->
+<!DOCTYPE html>
+<html lang="en">
+   <!-- ----- Head ----- -->
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{% static 'css/add_company.css' %}">
+      <title>{{action|capfirst}} company</title>
+   </head>
+
+
+   <!-- ----- Body ----- -->
+   <body>   
+      <!-- ----- Id company variable in hidden input ----- -->
+      {% if id_company > 0 %}         
+         <input hidden type="text" id="input_vector" value="{{vector}}">
+      {% else %}
+         <input hidden type="text" id="input_vector" value="0">
+      {% endif %}
+      
+
+      <!-- ----- Div title ----- -->
+      <div id="div_title">
+         <h1>{{action|capfirst}} company</h1>
+
+         <div>            
+            <a href="{% url 'companies:companies' %}">Back</a>
+            <input type="button" value="{{action|capfirst}}" id="create_company">
+         </div>
+         <hr>
+      </div>
+      
+
+      <!-- ----- Div name ----- -->
+      <div id="div_name">
+         <label for="txt_company_name">Company name</label>
+         <label for="select_country">Country</label>
+
+         <textarea id="txt_company_name"></textarea>         
+         <select id="select_country">
+            {% for country in countries %}
+               <option value="{{country.id}}">{{country.name}}</option>
+            {% endfor %}
+         </select>
+      </div>
+      
+
+      <!-- ----- Div address, postal code and city ----- -->
+      <div id="div_address">
+         <label for="txt_city">City</label>
+         <label for="txt_address">Address</label>
+         <label for="input_postal_code">Postal code</label>
+         
+         <textarea id="txt_city"></textarea>
+         <textarea id="txt_address"></textarea>
+         <input id="input_postal_code" type="text">         
+      </div>
+
+
+      <!-- ----- Div industry ----- -->
+      <div id="div_industry">
+         <label for="">Industry</label>
+         <label for="">Supersector</label>
+         <label for="">Sector</label>
+         <label for="">Subsector</label>
+
+         <select id="select_industry">
+            {% for industry in industries %}
+               <option value="{{industry.id}}" >{{industry.name}}</option>
+            {% endfor %}
+         </select>
+
+         <select id="select_supersector"></select>
+
+         <select id="select_sector"></select>
+
+         <select id="select_subsector"></select>
+      </div>
+
+      
+      <!-- ----- Div year establishment, first expo and bussines description ----- -->
+      <div id="div_year_establishment">
+         <div>
+            <label for="input_year_establishment">Year of<br>establishment</label>            
+            <input id="input_year_establishment" type="text">
+
+            <label for="input_year_first_expo">Year of<br>first expo</label>
+            <input id="input_year_first_expo" type="text">
+         </div>
+
+         <div>
+            <label for="txt_bussines_description">Bussines description</label>
+            <textarea id="txt_bussines_description"></textarea>
+         </div>         
+      </div>
+
+
+      <!-- ----- Div comments ----- -->
+      <div id="div_comments">
+         <label for="txt_comments">Comments</label>
+         <textarea id="txt_comments"></textarea>
+      </div>
+
+
+      <!-- ----- Scrips ----- -->
+      <script src="{% static 'js/jquery.js' %}"></script>
+      <script src="{% static 'js/add_company.js' %}"></script>
+
+
+      <!-- ----- Hidden selects ----- -->
+      <select hidden id="select_supersector_hidden">
+         {% for supersector in supersectors %}
+            <option value="{{supersector.id}}" id="{{supersector.industry.id}}">{{supersector.name}}</option>
+         {% endfor %}
+      </select>
+
+      <select hidden id="select_sector_hidden">
+         {% for sector in sectors %}
+            <option value="{{sector.id}}" id="{{sector.supersector.id}}">{{sector.name}}</option>
+         {% endfor %}
+      </select>
+
+      <select hidden id="select_subsector_hidden">
+         {% for subsector in subsectors %}
+            <option value="{{subsector.id}}" id="{{subsector.sector.id}}">{{subsector.name}}</option>
+         {% endfor %}
+      </select>
+
+
+      <!-- ----- Hidden form to send the information ----- -->
+      <form hidden id='form_create_company' action="{% url 'companies:add' action id_company %}" method='POST'>
+         {% csrf_token %}
+
+         <input type="text" name="input_create_company" id='input_create_company'>
+      </form>
+   </body>
+</html>

@@ -1,0 +1,58 @@
+<!-- ----- Imports ----- -->
+{% load static %}
+
+
+
+
+<!-- ----- Html ----- -->
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{% static 'css/additional_info.css' %}">
+      <title>Additional information</title>
+   </head>
+
+
+
+
+   <!-- ----- Body ----- -->
+   <body>
+      <div id="div_modal">
+         <div id="div_modal_content">
+            <div id="div_modal_title_bar">
+               <h2 id="h1_relation_name"></h2>
+               <h3 id="h3_created"></h3>
+               <h3 id="h3_updated"></h3>
+               <h2 class="close_modal">&times;</h2>  
+            </div>
+            
+            <div id="div_relation">
+               <table>
+                  <thead>
+                     <tr>                        
+                        <th style="width:8%">Letter</th>
+                        <th style="width:8%">Capability<br>number</th>
+                        <th style="width:8%">Process<br>number</th>
+                        <th style="width:68%">Name</th>
+                        <th style="width:8%">Percentage</th>
+                     </tr>                                                                  
+                  </thead>
+
+
+                  <tbody id="body_additional_info"></tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+
+
+
+
+      <!-- ----- Scripts ----- -->
+      <script src="{% static 'js/jquery.js' %}"></script>
+      <script src="{% static 'js/additional_info.js' %}"></script>
+   </body>
+</html>

@@ -1,0 +1,43 @@
+#div_modal_changes {
+   display: none; /* Hidden by default */
+   position: fixed; /* Stay in place */
+   z-index: 1; /* Sit on top */
+   left: 0;
+   top: 0;
+   width: 100%; /* Full width */
+   height: 100%; /* Full height */
+   overflow: auto; /* Enable scroll if needed */
+   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */}
+
+#div_modal_changes_content {
+   display: grid;   
+   grid-template-columns: 1fr;
+   grid-template-rows: repeat(2, 1fr);
+   align-items: center;
+   justify-content: center;
+   width: 20%;
+   height: 15rem;
+   margin: 10rem auto 0 auto;
+   text-align: center;
+   border-radius: 7%;
+   font-size: 1.4rem;
+   background-color: white;}
+
+#div_changes_buttons {
+   display: grid;   
+   grid-template-columns: repeat(2, 1fr);   
+   align-items: center;
+   justify-content: center;
+   width: 60%;
+   margin: 0 auto;
+   text-align: center;}
+
+   #div_changes_buttons label:hover {
+      font-weight: bold;
+      cursor: pointer;}
+
+
+
+
+
+

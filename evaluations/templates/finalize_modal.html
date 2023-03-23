@@ -1,0 +1,59 @@
+<!-- ----- Imports ----- -->
+{% load static %}
+
+
+
+
+<!-- ----- Html ----- -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+   <link rel="stylesheet" href="{% static 'css/finalize_modal.css' %}">
+</head>
+
+
+
+
+<!-- ----- Body ----- -->
+<body>
+   <!-- ----- hidden id eva input ----- -->
+   <input hidden type="text" id="hidden_input_id_eva">
+
+   
+   <div id="div_modal_finalize">
+      <div id="div_modal_finalize_content">
+         <div>
+            <label>Company name</label>            
+            <input type="text" id="input_company_name" disabled>
+            <label>Relation name</label>            
+            <input type="text" id="input_relation_name" disabled>            
+         </div>
+
+         <hr class="hr_finalize_modal">
+
+         <div>
+            <label>Do you want to finalize the evaluations selected?<br>
+               <span>(you won't be allowed to make changes in the scores)</span></label>
+         </div>
+
+         <hr class="hr_finalize_modal">
+
+         <div>
+            <button class="btn_finalize" data-id="cancel">Cancel</button>
+            <button class="btn_finalize" data-id="delete">Finalize</button>
+         </div>
+      </div>
+   </div>   
+
+
+   <!-- ----- Scripts ----- -->
+   <script src="{% static 'js/jquery.js' %}"></script>
+   <script src="{% static 'js/finalize_modal.js' %}"></script>
+</body>
+</html>
+
+
+
