@@ -73,7 +73,10 @@
                         <td style="text-align:center; width:10%" class="edit">
                            <a href="{% url 'companies:update' company.id %}">Edit</a>
                         </td> <!-- 5 -->
-                        <td style="text-align:center; width:10%" class="delete">Delete</td> <!-- 6 -->
+                        
+                        <td style="text-align:center; width:10%" class="edit">
+                           <a href="{% url 'companies:delete' company.id %}">Delete</a>
+                        </td> <!-- 6 -->                        
                      {% endif %}
                      
                      <td hidden>{{company.address}}</td> <!-- 7 -->

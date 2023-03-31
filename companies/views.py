@@ -92,10 +92,10 @@ class CompanyUpdateView(SuccessMessageMixin, UpdateView):
 ------------------------------------------------------------------------------------- """
 @method_decorator(login_required, name='dispatch')
 class CompanyDeleteView(SuccessMessageMixin, DeleteView):
-   model = Company
-   success_url = reverse_lazy('companies:companies')
-   template_name = 'companies/delete_company.html'
+   model = Company   
+   template_name = 'companies/company_confirm_delete.html'
    success_message = 'The company was succesfully deleted'
+   success_url = reverse_lazy('companies:companies')
 
 
 

@@ -1,0 +1,42 @@
+hr {
+   border: 1.5px solid red;
+   margin-top: 3rem;}
+
+#div_delete {
+   display: block;
+   margin: 8rem auto 0 auto;
+   text-align: center;
+   font-size: 1.6rem;
+   width: 50%;}
+
+#div_delete_buttons {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   margin: 3rem auto 0 auto;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   width: 50%;}   
+
+   #div_delete_buttons a {
+      text-decoration: none;            
+      color: black;}
+
+      #div_delete_buttons a:hover {
+         font-weight: bold;
+         cursor: pointer;}
+
+   #div_delete_buttons input {      
+      border: none;
+      background-color: white;
+      font-size: 1.4rem;}
+
+      #div_delete_buttons input:hover {
+         font-weight: bold;
+         cursor: pointer;
+         color: red;}
+
+   
+
+
+

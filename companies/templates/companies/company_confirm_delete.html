@@ -1,0 +1,36 @@
+<!-- --- Imports --- -->
+{% load static %}
+
+
+
+<!-- --- Html --- -->
+<!DOCTYPE html>
+<html lang="en">
+   <!-- --- Head --- -->
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{% static 'css/delete_company.css' %}">
+      <title>Delete company</title>
+   </head>
+
+
+   <!-- --- Body --- -->
+   <body>
+      <div id="div_delete">
+         <form method="post">
+            {% csrf_token %}
+      
+            Do you want to delete {{object.name}}?            
+
+            <div id="div_delete_buttons">
+               <input type="submit" value="Delete">
+               <a href="{% url 'companies:companies' %}">Cancel</a>
+            </div>            
+         </form>            
+
+         <hr>
+      </div>   
+   </body>
+</html>

@@ -6,8 +6,8 @@ $(document).ready(function() {
    let id_industry = $("#select_industry").val()
    
    
-   // --- Ir add or edit   
-   if($("#div_add_title h1").text() == 'Add company') {
+   // --- If add or edit   
+   if($("#div_add_title h1").text() === 'Add Company') {
       load_supersector(id_industry)
       load_sector($("#select_supersector").val())
       load_subsector($("#select_sector").val())

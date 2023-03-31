@@ -3,48 +3,29 @@
  */
 $(document).ready(function() {   
    //--- Messages
-   let message, action
+   let message
 
    if($(".messages li").length > 0) {
-      $(".messages li").each(function() {      
-         if($(this).text() == 'delete') {
-            message = 'The company was succesfully deleted'
-            action = $(this).text()
-   
-         } else if ($(this).text() == 'add') {
-            message = 'The company was succesfully added'
-            action = $(this).text()
-   
-         } else {
-            message = 'The company was succesfully updated'
-            action = $(this).text()
-         }            
+      $(".messages li").each(function() {          
+         message = $(this).text()         
       })
    
-      h1_alert_messages(message, action)
+      h1_alert_messages(message)
    }   
 })
 
 
 // ------ Function to change the h1 title to show alert messages
-function h1_alert_messages(message, action) {
+function h1_alert_messages(message) {
    let element = $("#div_title h1")
 
    element.text(message)
-
-   if(action == 'delete') {
-      element.css({
-         'color':'red',
-         'font-size':'1.6rem',
-      })
-
-   } else {
-      element.css({
-         'color':'rgba(56, 142, 60, 1',
-         'font-size':'1.6rem',
-      })
-   }
    
+   element.css({
+      'color':'rgba(56, 142, 60, 1',
+      'font-size':'1.6rem',
+   })
+    
    setTimeout(function() {
       let element = $("#div_title h1")
       
@@ -165,8 +146,6 @@ function find_industry(id) {
 $("#label_close").click(function() {
    $("#div_modal").css('display','none')
 })
-
-
 
 
 
