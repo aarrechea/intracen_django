@@ -2,7 +2,7 @@
     Imports
 --------------------------------------------------------------------------------------"""
 from django.views.generic import ListView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required
@@ -83,6 +83,19 @@ class CompanyUpdateView(SuccessMessageMixin, UpdateView):
       context['supersector'] = company.subsector.sector.supersector.id
       context['industry'] = company.subsector.sector.supersector.industry.id
       return context
+
+
+
+
+"""--------------------------------------------------------------------------------------
+   Delete company
+------------------------------------------------------------------------------------- """
+@method_decorator(login_required, name='dispatch')
+class CompanyDeleteView(SuccessMessageMixin, DeleteView):
+   model = Company
+   success_url = reverse_lazy('companies:companies')
+   template_name = 'companies/delete_company.html'
+   success_message = 'The company was succesfully deleted'
 
 
 
