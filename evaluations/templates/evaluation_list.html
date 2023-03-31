@@ -31,6 +31,7 @@
    <!-- ----- Includes ----- -->
    {% include 'delete.html' %}
    {% include 'finalize_modal.html' %}
+   {% include 'view.html' %}
 
 
    <!-- ----- Div title ----- -->
@@ -59,6 +60,8 @@
                </tr>
             </thead>
 
+
+            <!-- --- Body --- -->
             <tbody id="body_evaluations_table">
                {% for evaluation in evaluation_list %}
                   <tr>
@@ -76,13 +79,19 @@
                            <a class="continue" href="{% url 'evaluations:continue' evaluation.id %}">Continue</a>
                         </td>
                      {% else %}
-                        <td style="text-align:center; width:7%; font-style:italic">Continue</td>
+                        <td style="text-align:center; width:7%;" class="view">
+                           View
+                        </td>
                      {% endif %}
 
                      {% if evaluation.relation.total_processes == evaluation.processes_evaluated and evaluation.finalized == 0 %}
                         <td style="text-align:center; width:7%" class="finalize">Finalize</td>
+                     {% elif  evaluation.finalized == 1 %}
+                        <td style="text-align:center; width:7%;" class="report">
+                           Report
+                        </td>
                      {% else %}
-                        <td style="text-align:center; width:7%; font-style:italic">Finalize</td>
+                     <td style="text-align:center; width:7%; font-style:italic">Finalize</td>
                      {% endif %} <!-- 7 -->
                      
                      {% if evaluation.finalized == 0 %} <!-- 8 -->

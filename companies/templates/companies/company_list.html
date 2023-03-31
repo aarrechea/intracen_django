@@ -27,18 +27,18 @@
 
 
    <!-- ----- Modal additional info ----- -->
-   {% include 'add_info_company.html' %}
+   {% include 'companies/add_info_company.html' %}
 
 
    <!-- ----- Div title ----- -->
    <div id="div_title">
       <h1>Companies</h1>
-      <a href="{% url 'companies:add' 'add' %}">Add company</a>
+      <a href="{% url 'companies:add' %}">Add company</a>
    </div>
 
    
    <!-- ----- Companies list ----- -->
-   {% if companies_list|length == 0 %}
+   {% if object_list|length == 0 %}
       <div id="div_empty_list">
          <h2>There is no companies yet</h2>
       </div>      
@@ -56,7 +56,7 @@
             </thead>
 
             <tbody id="body_companies_table">
-               {% for company in companies_list %}
+               {% for company in object_list %}
                   <tr>
                      <td>{{company.name}}</td> <!-- 0 -->
                      <td>{{company.country.name}}</td>                                    
@@ -71,7 +71,7 @@
                         <td style="text-align:center; width:10% font-style:italic">Delete</td> <!-- 6 -->
                      {% else %}
                         <td style="text-align:center; width:10%" class="edit">
-                           <a href="{% url 'companies:add' 'edit' company.id %}">Edit</a>
+                           <a href="{% url 'companies:update' company.id %}">Edit</a>
                         </td> <!-- 5 -->
                         <td style="text-align:center; width:10%" class="delete">Delete</td> <!-- 6 -->
                      {% endif %}

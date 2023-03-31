@@ -30,6 +30,10 @@ class Country(models.Model):
    continent = models.ForeignKey(Continent, on_delete=models.CASCADE)
    region = models.ForeignKey(Region, on_delete=models.CASCADE)
 
+   def __str__(self):
+       return self.name
+   
+
 
 
 

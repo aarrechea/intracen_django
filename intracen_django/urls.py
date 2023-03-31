@@ -8,6 +8,7 @@ from elements.urls import elements_patterns
 from relations_tree.urls import relations_patterns
 from evaluations.urls import evaluations_patterns
 from companies.urls import companies_patterns
+from users.urls import users_patterns
 
 
 
@@ -23,7 +24,8 @@ urlpatterns = [
     path('', include(elements_patterns)),
     path('', include(relations_patterns)),
     path('', include(evaluations_patterns)),
-    path('', include(companies_patterns)),    
+    path('', include(companies_patterns)),
+    path('', include(users_patterns)),
 ]
 
 

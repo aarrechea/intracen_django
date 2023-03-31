@@ -1,0 +1,57 @@
+/* --- View modal --- */
+#div_view_modal {   
+   display: none; /* Hidden by default */
+   position: fixed; /* Stay in place */
+   z-index: 1; /* Sit on top */
+   left: 0;
+   top: 0;
+   width: 100%; /* Full width */
+   height: 100%; /* Full height */
+   overflow: auto; /* Enable scroll if needed */   
+   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */}
+
+
+
+
+/* --- Div view content --- */   
+#div_view_content {
+   display: grid;
+   grid-template-columns: 1fr;
+   grid-template-rows: 90% 10%;
+   justify-content: center;      
+   width: 70%;
+   height: 40rem;
+   overflow: auto;
+   background-color: white;
+   border-radius: 1%;
+   padding: 1rem;
+   margin: 6rem auto 0 auto;}
+
+
+
+
+/* --- Div view table --- */
+#div_view_table {
+   height: 100%;
+   overflow: auto;
+}
+
+
+
+/* --- Div view button --- */
+#div_view_buttons {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   text-align: center;}
+
+   #div_view_buttons button {
+      width: 6rem;
+      height: 3rem;
+      border: none;      
+      font-size: 1.3rem;
+      background-color: white;}
+
+      #div_view_buttons button:hover {
+         font-weight: bold;
+         cursor: pointer;}

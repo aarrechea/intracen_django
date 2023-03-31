@@ -1,120 +1,88 @@
 """--------------------------------------------------------------------------------------
     Imports
 --------------------------------------------------------------------------------------"""
+from django.views.generic import ListView
+from django.views.generic.edit import CreateView, UpdateView
 from django.shortcuts import render, redirect
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from .models import Company
+from .forms import CompanyForm
 from countries.models import Country
 from industries.models import Industry, Supersector, Sector, Subsector
+
 
 
 
 """--------------------------------------------------------------------------------------
    Companies list
 --------------------------------------------------------------------------------------"""
-def companies_list(request):
-   companies_list = Company.objects.all()
-   industries = Industry.objects.all()
-   supersectors = Supersector.objects.all()
-   sectors = Sector.objects.all()
-   subsectors = Subsector.objects.all()
+@method_decorator(login_required, name='dispatch')
+class CompaniesListView(ListView):
+   model = Company
+   template_name = 'company_list.html'
 
-   return render(request, 'companies_list.html', {
-      'title':'companies',
-      'element':'Companies',
-      'companies_list':companies_list,
-      'industries':industries,
-      'supersectors':supersectors,
-      'sectors':sectors,
-      'subsectors':subsectors,
-   })
-
+   def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)
+      context['title'] = 'companies'
+      context['element'] = 'Companies'
+      context["industries"] = Industry.objects.all()
+      context["supersectors"] = Supersector.objects.all()
+      context["sectors"] = Sector.objects.all()
+      context["subsectors"] = Subsector.objects.all()
+      return context
+   
 
 
 """--------------------------------------------------------------------------------------
    Add company
---------------------------------------------------------------------------------------"""
-def add_company(request, action, id_company=0):
-   if request.method == 'POST':      
-      string_vector = request.POST.get('input_create_company')
-      vector = string_vector.split(",")
-      country_instance = Country.objects.get(id=vector[1])
-      subsector_instance = Subsector.objects.get(id=vector[5])
-
-      if id_company == 0:                  
-         company = Company(name=vector[0], country=country_instance, city=vector[2], address=vector[3],
-                           postal_code=vector[4], subsector=subsector_instance, year_establishment=vector[6],
-                           year_first_expo=vector[7], bussines_description=vector[8], comments=vector[9])
-
-      else:
-         company = Company.objects.get(pk=id_company)
-
-         company.name = vector[0]
-         company.country = country_instance
-         company.city = vector[2]
-         company.address = vector[3]
-         company.postal_code = vector[4]
-         company.subsector = subsector_instance
-         company.year_establishment = vector[6]
-         company.year_first_expo = vector[5]
-         company.bussines_description = vector[8]
-         company.comments = vector[9]         
-
-      company.save()
-      
-      messages.add_message(request, messages.INFO, action)
-      
-      return redirect('companies:companies')
+------------------------------------------------------------------------------------- """
+@method_decorator(login_required, name='dispatch')
+class CompanyCreateView(SuccessMessageMixin, CreateView):
+   model = Company
+   form_class = CompanyForm
+   template_name = 'companies/add.html'
+   success_url = reverse_lazy('companies:companies')
+   success_message = 'The company was succesfully created'
 
 
-   # ----- GET 
-   vector = []
-   vector_str = ''
+   def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)
+      context["industries"] = Industry.objects.all()
+      context["supersectors"] = Supersector.objects.all()
+      context["sectors"] = Sector.objects.all()
+      context["subsectors"] = Subsector.objects.all()
+      return context
+
+
+
+"""--------------------------------------------------------------------------------------
+   Update company
+------------------------------------------------------------------------------------- """
+@method_decorator(login_required, name='dispatch')
+class CompanyUpdateView(SuccessMessageMixin, UpdateView):
+   model = Company
+   form_class = CompanyForm
+   template_name = 'companies/update_company.html'
+   success_url = reverse_lazy('companies:companies')   
+   success_message = 'The company was succesfully updated'
+
    
-   if id_company > 0: # If edit
-      company = Company.objects.get(pk=id_company)
-      vector_str = put_company_values_to_edit(id_company, vector, company)
-   
-   countries = Country.objects.all()
-   industries = Industry.objects.all()
-   supersectors = Supersector.objects.all()
-   sectors = Sector.objects.all()
-   subsectors = Subsector.objects.all()
-         
-   return render(request, 'add_company.html', {
-      'countries':countries,
-      'industries':industries,
-      'supersectors':supersectors,
-      'sectors':sectors,
-      'subsectors':subsectors,
-      'action':action,
-      'id_company':id_company,
-      'vector':vector_str,
-   })
-
-
-# --- Put company values to edit
-def put_company_values_to_edit(id_company, vector, company):
-   vector.append(id_company) # 0
-   vector.append(company.name)
-   vector.append(company.country.id)
-   vector.append(company.city) # 3
-   vector.append(company.address)  
-   vector.append(company.postal_code)
-   vector.append(company.subsector.id) # 6
-   vector.append(company.year_establishment)
-   vector.append(company.year_first_expo)
-   vector.append(company.bussines_description) # 9
-   vector.append(company.comments) # 10    
-
-   vector_str = ','.join(str(item) for item in vector)
-
-   return vector_str
-
-
-
-
-
+   def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)      
+      company = Company.objects.get(pk=self.kwargs['pk'])
+      context["industries"] = Industry.objects.all()
+      context["supersectors"] = Supersector.objects.all()
+      context["sectors"] = Sector.objects.all()
+      context["subsectors"] = Subsector.objects.all()      
+      context['subsector'] =  company.subsector.id
+      context['sector'] = company.subsector.sector.id
+      context['supersector'] = company.subsector.sector.supersector.id
+      context['industry'] = company.subsector.sector.supersector.industry.id
+      return context
 
 
 

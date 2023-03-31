@@ -1,0 +1,167 @@
+<!-- --- Imports --- -->
+{% load static %}
+
+
+<!-- --- Html --- -->
+<!DOCTYPE html>
+<html lang="en">
+
+   <!-- --- Head --- -->
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{% static 'css/add.css' %}">
+      <link rel="stylesheet" href="{% static 'css/colors.css' %}">
+      <title>Update company</title>
+   </head>
+
+   <!-- --- Body --- -->
+   <body>      
+      <div id='div_add_title'>
+         <h1>Update Company</h1>
+         <a href="{% url 'companies:companies' %}">Back</a>
+      </div>
+
+
+      <!-- --- Hidden inputs with the id of industries elements --- -->
+      <input hidden id="input_subsector_hidden" type="text" value="{{subsector}}">
+      <input hidden id="input_sector_hidden" type="text" value="{{sector}}">
+      <input hidden id="input_supersector_hidden" type="text" value="{{supersector}}">
+      <input hidden id="input_industry_hidden" type="text" value="{{industry}}">
+      
+
+      <!-- --- Form --- -->
+      <form method="post">
+         {% csrf_token %}
+
+         {{ form.non_field_errors }}
+
+         <div id="div_company_name">
+            {{form.name.errors}}
+            <label for="{{form.name.id_for_label}}">Company name</label>
+            {{form.name}}
+         </div>
+
+         <hr>
+
+         <div id="div_country">
+            {{form.country.errors}}
+            {{form.city.errors}}
+            <label for="{{form.country.id_for_label}}">Country</label>
+            <label for="{{form.city.id_for_label}}">City</label>
+            {{form.country}}
+            {{form.city}}
+         </div>
+
+         <hr>
+
+         <div id="div_address">
+            {{form.address.errors}}
+            {{form.postal_code.errors}}
+            <label for="{{form.address.id_for_label}}">Address</label>
+            <label for="{{form.postal_code.id_for_label}}">Postal code</label>
+            {{form.address}}
+            {{form.postal_code}}
+         </div>
+
+         <hr>
+
+         <div id="div_establishment">
+            {{form.year_of_establishment.errors}}
+            {{form.year_first_expo.errors}}            
+            <label for="{{form.year_of_establishment.id_for_label}}">Year of establishment</label>
+            <label for="{{form.year_first_expo.id_for_label}}">Year of first exportation</label>
+            {{form.year_establishment}}
+            {{form.year_first_expo}}
+         </div>
+
+         <hr>
+
+         <div class="div_industry">            
+            <label for="select_industry">Industry</label>
+            <label for="select_supersector">Supersector</label>
+            
+            <select name="" id="select_industry">
+               {% for industry in industries %}
+                  <option value="{{industry.id}}">{{industry.name}}</option>
+               {% endfor %}               
+            </select>
+            <select name="" id="select_supersector"></select>            
+         </div>
+
+         <div class="div_industry">
+            {{form.subsector.errors}}
+            <label for="select_sector">Sector</label>
+            <label for="{{form.subsector.id_for_label}}">Subsector</label>
+
+            <select name="" id="select_sector"></select>            
+            {{form.subsector}}
+         </div>
+
+         <hr>
+
+         <div id="div_comments">
+            <label for="{{form.comments.id_for_label}}">Comments</label>
+            {{form.comments}}
+         </div>
+
+         <hr>
+         
+         <div id="div_add_submit">
+            <input type="submit" value='Update'>
+         </div>         
+      </form>
+
+
+
+      <!-- --- Scrips --- -->
+      <script src="{% static 'js/jquery.js' %}"></script>
+      <script src="{% static 'js/add.js' %}"></script>
+   </body>
+</html>
+
+
+
+
+<!-- --- Hidden supersector table --- -->
+<table hidden>
+   <tbody id="body_supersector_hidden">
+      {% for supersector in supersectors %}
+         <tr>
+            <td>{{supersector.id}}</td>
+            <td>{{supersector.industry.id}}</td>
+            <td>{{supersector.name}}</td>
+         </tr>
+      {% endfor %}
+   </tbody>
+</table>
+
+<!-- --- Hidden sector table --- -->
+<table hidden>
+   <tbody id="body_sector_hidden">
+      {% for sector in sectors %}
+         <tr>
+            <td>{{sector.id}}</td>
+            <td>{{sector.supersector.id}}</td>
+            <td>{{sector.name}}</td>
+         </tr>
+      {% endfor %}
+   </tbody>
+</table>
+
+<!-- --- Hidden subsector table --- -->
+<table hidden>
+   <tbody id="body_subsector_hidden">
+      {% for subsector in subsectors %}
+         <tr>
+            <td>{{subsector.id}}</td>
+            <td>{{subsector.sector.id}}</td>
+            <td>{{subsector.name}}</td>
+         </tr>
+      {% endfor %}
+   </tbody>
+</table>
+
+
+

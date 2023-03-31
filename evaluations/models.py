@@ -90,7 +90,7 @@ class CapabilityScore(models.Model):
     score_percentage = models.DecimalField(default=0, max_digits=5, decimal_places=2)
     score = models.DecimalField(default=0, max_digits=5, decimal_places=2)
     score_final = models.DecimalField(default=0, max_digits=5, decimal_places=2)
-    relation_cap = models.ForeignKey(RelationCap, on_delete=models.CASCADE)
+    relation_cap = models.ForeignKey(RelationCap, on_delete=models.CASCADE)    
 
 
 
@@ -105,6 +105,7 @@ class CompetenceScore(models.Model):
     order = models.SmallIntegerField(default=0)
     score_percentage = models.DecimalField(default=0, max_digits=5, decimal_places=2)
     score_final = models.DecimalField(default=0, max_digits=5, decimal_places=2)
+    
 
 
 

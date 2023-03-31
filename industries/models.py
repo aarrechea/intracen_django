@@ -11,6 +11,10 @@ from django.db import models
 class Industry(models.Model):
    name = models.CharField(max_length=150)
 
+   def __str__(self):
+       return self.name
+   
+
 
 
 """--------------------------------------------------------------------------------------
@@ -19,6 +23,10 @@ class Industry(models.Model):
 class Supersector(models.Model):
    name = models.CharField(max_length=150)
    industry = models.ForeignKey(Industry, on_delete=models.CASCADE)
+
+   def __str__(self):
+       return self.name
+   
 
 
 
@@ -29,6 +37,9 @@ class Sector(models.Model):
    name = models.CharField(max_length=150)
    supersector = models.ForeignKey(Supersector, on_delete=models.CASCADE)
 
+   def __str__(self):
+       return self.name
+   
 
 
 """--------------------------------------------------------------------------------------
@@ -36,7 +47,11 @@ class Sector(models.Model):
 --------------------------------------------------------------------------------------"""
 class Subsector(models.Model):
    name = models.CharField(max_length=150)
-   sector = models.ForeignKey(Sector, on_delete=models.CASCADE)   
+   sector = models.ForeignKey(Sector, on_delete=models.CASCADE)
+
+   def __str__(self):
+      return self.name
+   
 
 
 

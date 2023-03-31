@@ -1,5 +1,5 @@
 /**
- * Cancel or delete buttons
+ * Cancel or finalize buttons
  */
 $(".btn_finalize").click(function() {
    if($(this).attr('data-id') == 'cancel') {
@@ -71,30 +71,25 @@ function disable_finalized_button(evaluation_id) {
    $("#body_evaluations_table tr").each(function() {      
       if($(this).find('td').eq(11).html() == evaluation_id) {
          $(this).find('td').eq(4).text("Yes")
-         $(this).find('td').eq(6).css({
-            'text-align':'center',
-            'width':'7%',
-            'font-style':'italic',
-         })
 
-         $(this).find('td').eq(7).css({
-            'text-align':'center',
-            'width':'7%',
-            'font-style':'italic',
-         })
+         $(this).find('td').eq(6).text("View")
+         $(this).find('td').eq(6).find('a').remove()
+         $(this).find('td').eq(6).removeClass()
+         $(this).find('td').eq(6).addClass("view")
+         
+         $(this).find('td').eq(7).text("Report")         
+         $(this).find('td').eq(7).removeClass()
+         $(this).find('td').eq(7).addClass("report")
 
+         // Delete
+         $(this).find('td').eq(8).removeClass()
          $(this).find('td').eq(8).css({
             'text-align':'center',
             'width':'7%',
             'font-style':'italic',
-         })
-
-         $(this).find('td').eq(6).find('a').remove()
-         $(this).find('td').eq(6).text("Continue")
-         $(this).find('td').eq(7).removeClass()
-         $(this).find('td').eq(8).removeClass()
-
-         return false
+         })         
+         
+         //return false
       }
    })
 }

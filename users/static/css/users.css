@@ -1,0 +1,61 @@
+/* --- Div user title */
+#div_user_title {
+   display: block;
+   margin-top: 10rem;
+   width: auto;
+   text-align: center;}
+
+   #div_user_title label {
+      font-size: 1.3rem;
+      padding:1rem;}
+
+      #div_user_title label:hover {
+         font-weight: bold;
+         cursor: pointer;}
+
+
+
+
+/* --- Div user list --- */
+#div_user_list {
+   display: grid;
+   grid-template-columns: 1fr;
+   justify-content: center;
+   align-items: center;
+   margin: 2rem auto 0 auto;
+   width: 70%;
+   font-size: 1.2rem;}
+
+
+
+
+/* --- Div user card --- */
+.div_user_card {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   grid-template-rows: repeat(4, 1fr);
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   height: auto;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+   margin: 0 auto 1rem auto;}
+
+   .div_user_card:hover {      
+      box-shadow: 0 6px 12px 0 var(--green_60);}   
+
+.title {
+   color: grey;
+   margin-left: 0.5rem;
+   font-size: 1rem;}   
+
+.content {
+   font-size: 1.1rem;   
+   margin: 0 0 0.6rem 1.5rem;}
+
+
+
+
+
+
+

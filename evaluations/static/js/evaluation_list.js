@@ -130,6 +130,94 @@ $(".finalize").click(function() {
 
 
 
+/**
+ * View the evaluation rating and process scores using AJAX
+ */
+function getCookie(name) {
+   let cookieValue = null;
+   if (document.cookie && document.cookie !== '') {
+         const cookies = document.cookie.split(';');
+         for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+               cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+               break;
+            }
+         }
+   }
+   return cookieValue;
+}
+
+$("#body_evaluations_table").on('click', ".view", function() {
+   $("#div_view_modal").css('display','block')
+   id_eva = $(this).closest('tr').find('td').eq(11).html()
+
+   $.ajax({
+      type: 'POST',      
+      headers: {'X-CSRFToken': getCookie("csrftoken")},    
+      url: "/evaluations/view/" + id_eva,
+      //data: {"id":id, "element":element},
+
+      success: function (response) {
+         get_vector(JSON.parse(response))
+         
+      },
+      error: function (response) {
+          console.log("Fail")
+      }
+  })
+})
+
+function get_vector(vector) {   
+   let t_body = $("#body_rating_view")
+
+   $("#body_rating_view tr").remove()
+
+
+   for(i = 0; i < vector.length; i++) {
+      let row = "<tr>"
+      if(vector[i]['element'] == 'competences') {
+         row += "<td style='text-align:center'>" + vector[i]['relation_letter'] + "</td>"
+         row += "<td></td>"
+         row += "<td></td>"
+      } else if(vector[i]['element'] == 'capabilities') {
+         row += "<td></td>"
+         row += "<td style='text-align:center'>" + vector[i]['relation_letter'] + "</td>"
+         row += "<td></td>"
+      } else {
+         row += "<td></td>"
+         row += "<td></td>"
+         row += "<td style='text-align:center'>" + vector[i]['relation_letter'] + "</td>"
+      }
+
+      if(vector[i]['element'] == 'competences'){
+         row += "<td style='text-align:left'>" + vector[i]['name'] + "</td>"
+
+      } else if(vector[i]['element'] == 'capabilities') {
+         row += "<td style='text-align:left; padding-left:1rem'>" + vector[i]['name'] + "</td>"
+
+      } else {
+         row += "<td style='text-align:left; padding-left: 2rem'>" + vector[i]['name'] + "</td>"
+      }
+
+
+      
+      
+      if(vector[i]['element'] == 'processes') {
+         row += "<td style='text-align:left; padding-left:3rem'>" + vector[i]['score_transform'] * 100 + " %</td>"
+      } else if (vector[i]['element'] == 'capabilities') {
+         row += "<td style='text-align:left; padding-left: 2rem'>" + vector[i]['score_percentage'] * 100 + " %</td>"
+      } else {
+         row += "<td style='text-align:left;padding-left:1rem'>" + vector[i]['score_percentage'] * 100 + " %</td>"
+      }
+      
+      row += "</tr>"
+
+      t_body.append(row)
+   }   
+}
+
 
 
 

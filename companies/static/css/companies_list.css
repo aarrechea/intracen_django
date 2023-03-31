@@ -1,4 +1,4 @@
-/* ----- Div title ----- */
+/* ----- Title ----- */
 #div_title {
    text-align: center;
    margin: 9rem auto 0 auto;
@@ -19,7 +19,7 @@
 
 
          
-/* ----- Div empty list ----- */
+/* ----- Empty list ----- */
 #div_empty_list {
    text-align: center;
    margin-top: 6rem;}
@@ -54,7 +54,8 @@
 .delete:hover {
    color:red}
 
-
+.information {
+   font-size: 1.1rem;}
 
 
 

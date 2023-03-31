@@ -4,9 +4,12 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from .models import AdditionalInformation, Element
 from general.models import Letter
 from django.contrib import messages
+from decorators.views import user_privileges
 
 
 
@@ -14,6 +17,8 @@ from django.contrib import messages
 """--------------------------------------------------------------------------------------
     Element list
 --------------------------------------------------------------------------------------"""
+@login_required
+@user_privileges
 def element_list(request, element):
    # ----- To show the modal
    if request.method == 'POST':
@@ -61,6 +66,8 @@ def element_list(request, element):
 """--------------------------------------------------------------------------------------
     Add element
 --------------------------------------------------------------------------------------"""
+@login_required
+@user_privileges
 def add_element(request, element):
    if request.method == 'POST':
       element_post = request.POST.get('element')
@@ -127,6 +134,8 @@ def add_element(request, element):
 """--------------------------------------------------------------------------------------
     Edit element
 --------------------------------------------------------------------------------------"""
+@login_required
+@user_privileges
 def edit_element(request, element, id):
    if request.method == 'POST':
       element_selected = Element.objects.get(pk=request.POST.get('id'))
@@ -207,6 +216,8 @@ def edit_element(request, element, id):
 """--------------------------------------------------------------------------------------
     Delete element
 --------------------------------------------------------------------------------------"""
+@login_required
+@user_privileges
 def delete_element(request):   
    if request.method == 'POST':
       element = Element.objects.get(id=request.POST.get('id'))

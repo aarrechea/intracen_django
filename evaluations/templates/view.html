@@ -1,0 +1,52 @@
+<!-- --- Imports --- -->
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+   <!-- --- Head --- -->
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{% static 'css/view.css' %}">
+   </head>
+
+
+   <!-- --- Body --- -->
+   <body>
+      <div id="div_view_modal">
+         <div id="div_view_content">
+            <div id="div_view_table">
+               <table>
+                  <thead>
+                     <th style="width:8%; text-align:center">Letter</th>
+                     <th style="width:8%; text-align:center">Capability<br>number</th>
+                     <th style="width:8%; text-align:center">Process<br>number</th>
+                     <th style="width:66%; text-align:center">Element name</th>
+                     <th style="width:10%; text-align:center">Rating</th>
+                  </thead>
+
+                  <tbody id="body_rating_view"></tbody>
+               </table>               
+            </div>
+   
+            <div id="div_view_buttons">
+               <button>Close</button>
+            </div>
+         </div>         
+      </div>
+
+      <!-- --- Scripts --- -->
+      <script src="{% static 'js/jquery.js' %}"></script>
+      <script src="{% static 'js/view.js' %}"></script>
+   </body>
+</html>
+
+
+
+
+
+
+

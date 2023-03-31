@@ -194,7 +194,7 @@ function put_initial_information(vector) {
 
    subsector_sector = load_subsector_id_data(vector[6])
    load_subsector(subsector_sector)
-   $("#select_subsector").val(vector[6]).change()   
+   $("#select_subsector").val(vector[6]).change()
 
    sector_supersector = load_sector_id_data(subsector_sector)
    load_sector(sector_supersector)   

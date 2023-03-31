@@ -7,11 +7,18 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.core import serializers
 from django.db.models import Count
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.db.models import F
+from itertools import chain
+from operator import itemgetter
 from .models import Evaluation, DataModel, ProcessScore, MainProducts, CapabilityScore, CompetenceScore
 from companies.models import Company
 from relations_tree.models import Relation, RelationComp, RelationCap, RelationPro
 from elements.models import Element, AdditionalInformation
 from decimal import Decimal
+import json
 
 
 
@@ -19,6 +26,7 @@ from decimal import Decimal
 """--------------------------------------------------------------------------------------
    Evaluation list
 --------------------------------------------------------------------------------------"""
+@login_required
 def evaluation_list(request):
    evaluation_list = Evaluation.objects.all()
    companies = Company.objects.all()
@@ -38,6 +46,7 @@ def evaluation_list(request):
 """--------------------------------------------------------------------------------------
    Create evaluation
 --------------------------------------------------------------------------------------"""
+@login_required
 def create_evaluation(request):
    if request.method == 'POST':
       id_company = request.POST.get('id_company')
@@ -127,6 +136,7 @@ def create_competence_score(eva):
 """--------------------------------------------------------------------------------------
    Delete evaluation
 --------------------------------------------------------------------------------------"""
+@login_required
 def delete_eva(request):
    if request.method == 'POST':
       id_eva = request.POST.get('id_eva')
@@ -173,6 +183,7 @@ def delete_eva(request):
 """--------------------------------------------------------------------------------------
    Continue evaluation from eva page to data evaluation page
 --------------------------------------------------------------------------------------"""
+@login_required
 def continue_eva(request, id_eva):   
    data = DataModel.objects.get(id_evaluation=id_eva)
    company = Evaluation.objects.get(id=id_eva).company.name
@@ -197,6 +208,7 @@ def continue_eva(request, id_eva):
 """--------------------------------------------------------------------------------------
    Save evaluation additional data
 --------------------------------------------------------------------------------------"""
+@login_required
 def save(request):   
    if request.method == 'POST':
       id_eva = request.POST.get('id_eva')
@@ -302,6 +314,7 @@ def main_products_serialized(main_products):
 """--------------------------------------------------------------------------------------
    General evaluation process in progress
 --------------------------------------------------------------------------------------"""
+@login_required
 def process(request, id_eva, form):   
    company = Evaluation.objects.get(id=id_eva).company.name
    relation = Evaluation.objects.get(id=id_eva).relation
@@ -337,6 +350,7 @@ def process(request, id_eva, form):
 """--------------------------------------------------------------------------------------
    Save score
 --------------------------------------------------------------------------------------"""
+@login_required
 def save_score(request):   
    if request.method == 'POST':
       vector = request.POST.get('vector').split(",")      
@@ -344,7 +358,7 @@ def save_score(request):
       process_score = ProcessScore.objects.filter(id_evaluation=vector[3]).get(element=vector[2])
       previous_score = process_score.score # To compare with the new score value
       process_score.score = vector[1]      
-      process_score.score_transform = Decimal(vector[1]) / 5
+      process_score.score_transform = (Decimal(vector[1]) - 1) * Decimal(0.25)
       process_score.save()
 
       
@@ -369,6 +383,7 @@ def save_score(request):
 """--------------------------------------------------------------------------------------
    Finalize evaluation
 --------------------------------------------------------------------------------------"""
+@login_required
 def finalize_evaluation(request):
    if request.method == 'POST':
       id_eva = request.POST.get('id_eva')
@@ -420,7 +435,7 @@ def calculate_score_pro(evaluation):
    parent_cap_grouped = evaluation.relation.relationpro_set.all().values('parent_element').annotate(Count('parent_element')).order_by()
 
    x = 0
-   for process in process_score:      
+   for process in process_score:
       if process.relation_pro.parent_element.id != parent_cap_grouped[x]['parent_element']:
          x += 1
       
@@ -489,7 +504,45 @@ def calculate_rating(evaluation):
 
    return rating
    
-   
+
+
+
+"""--------------------------------------------------------------------------------------
+   View evaluation
+--------------------------------------------------------------------------------------"""   
+@login_required
+def view_evaluation(request, id_eva):
+   eva_comp = CompetenceScore.objects.filter(evaluation=id_eva).values('order', 'score_percentage', 'element_id')
+   eva_cap = CapabilityScore.objects.filter(evaluation=id_eva).values('order', 'score_percentage', 'element_id')
+   eva_pro = ProcessScore.objects.filter(id_evaluation=id_eva).values('order', 'score_percentage', 'element_id', 'score_transform')
+
+   model_combination = sorted(list(chain(eva_comp, eva_cap, eva_pro)), key=itemgetter('order'))
+
+   for model in model_combination:      
+      if len(model) == 3:
+         model['score_transform'] = 0
+
+      element = Element.objects.get(pk=model['element_id'])
+      model['element'] = element.type
+      model['name'] = element.name
+
+      model['score_percentage'] = str(model['score_percentage'])
+      model['score_transform'] = str(model['score_transform'])
+
+      if model['element'] == 'competences':
+         rel = RelationComp.objects.get(id_element=element)
+         model['relation_letter'] = rel.relation_letter.name
+      elif model['element'] == 'capabilities':
+         rel = RelationCap.objects.get(id_element=element)
+         model['relation_letter'] = rel.number
+      else:
+         rel = RelationPro.objects.get(id_element=element)
+         model['relation_letter'] = rel.number
+
+   data = json.dumps(model_combination)
+
+   return JsonResponse(data, safe=False)
+
 
 
 

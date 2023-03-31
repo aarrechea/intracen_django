@@ -34,7 +34,7 @@ class Relation(models.Model):
 --------------------------------------------------------------------------------------"""
 class RelationComp(models.Model):
    original_letter = models.CharField(max_length=2, verbose_name="Original letter")
-   relation_letter = models.ForeignKey(Letter, on_delete=models.CASCADE, verbose_name='Relation letter')
+   relation_letter = models.ForeignKey(Letter, on_delete=models.CASCADE, verbose_name='Relation letter', related_name='letter')
    percentage = models.DecimalField(max_digits=5, decimal_places=2)
    order = models.SmallIntegerField(default=0)
    id_relation = models.ForeignKey(Relation, on_delete=models.CASCADE)   

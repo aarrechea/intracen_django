@@ -18,6 +18,7 @@ evaluations_patterns = ([
     path('evaluations/save', views.save, name='save'),
     path('evaluations/save_score', views.save_score, name='save_score'),
     path('evaluations/finalize', views.finalize_evaluation, name='finalize'),
+    path('evaluations/view/<int:id_eva>', views.view_evaluation, name='view'),
 ], 'evaluations')
 
 

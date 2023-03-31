@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'industries',
     'accounts',
     'user_profile',
+    'decorators',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -166,7 +168,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 """--------------------------------------------------------------------------------------
     After succesful login, redirect to root
 --------------------------------------------------------------------------------------"""
-LOGIN_REDIRECT_URL = "relations:relations"
+LOGIN_REDIRECT_URL = "evaluations:evaluations"
 LOGOUT_REDIRECT_URL = "login"
 
 

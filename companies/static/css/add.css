@@ -1,0 +1,158 @@
+/* --- Generic --- */
+div {
+   width: 70%;
+   margin: 3rem auto 0 auto;}
+
+label {
+   text-align: left;
+   font-size: 1.2rem;}
+
+input, select {
+   height: 2rem;
+   padding: 1rem;
+   font-size: 1.3rem;
+   border: none;
+   border-left: 1px solid var(--green_100);
+   background-color: white;}   
+
+select {
+   font-size: 1.2rem;
+   height: 4rem;}
+
+textarea {
+   border: none;
+   border-left: 1px solid var(--green_100);
+   font-size: 1.3rem;
+   padding: 1rem;
+   resize: none;}   
+
+hr {
+   margin-top: 3rem;
+   border: 1.5px solid var(--brown_100);
+   width: 40%;}
+
+
+
+
+/* --- Div add title --- */
+#div_add_title {
+   display: block;
+   margin: 0 auto;
+   text-align: center;}
+
+   #div_add_title a {
+      text-decoration: none;
+      color: black;
+      font-size: 1.4rem;}
+
+      #div_add_title a:hover {
+         font-weight: bold;
+         cursor: pointer;}
+
+
+
+
+/* --- Company name ---  */
+#div_company_name {
+   display: grid;
+   grid-template-columns: 1fr;
+   grid-auto-rows: auto;
+   row-gap: 0.5rem;}
+   
+      #div_company_name input {
+         height: 2rem;
+         padding: 1rem;
+         font-size: 1.3rem;
+         border: none;
+         border-left: 1px solid var(--green_100);
+         background-color: white;}
+
+
+
+
+/* --- Country and city ---  */
+#div_country {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   grid-auto-rows: auto;
+   column-gap: 0.5rem;
+   row-gap: 0.5rem;}
+
+
+
+
+/* --- Address and postal code ---  */
+#div_address {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   grid-auto-rows: auto;
+   column-gap: 0.5rem;
+   row-gap: 0.5rem;}
+
+
+
+
+/* --- Year of establishment and year of first exportation  */
+#div_establishment {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   grid-auto-rows: auto;
+   justify-content: center;
+   column-gap: 0.5rem;
+   row-gap: 0.5rem;   
+   width: 22%;}
+
+   #div_establishment input {
+      width: 10rem;}
+
+
+
+
+/* --- Industries --- */
+.div_industry {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   grid-auto-rows: auto;
+   column-gap: 0.5rem;
+   row-gap: 0.5rem;}
+
+
+
+
+/* --- Comments ---  */
+#div_comments {
+   display: grid;
+   grid-template-columns: 1fr;
+   grid-auto-rows: auto;
+   column-gap: 0.5rem;
+   row-gap: 0.5rem;}
+
+
+
+
+/* --- Submit --- */
+#div_add_submit {
+   display: block;
+   text-align: center;
+   width: 70%;}
+
+   #div_add_submit input {
+      border: none;
+      height: 4rem;
+      font-size: 1.4rem;
+      margin-bottom: 15rem;}
+
+      #div_add_submit input:hover {
+         font-weight: bold;
+         cursor: pointer;}
+
+
+
+
+
+
+
+
+
+   
+

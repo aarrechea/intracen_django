@@ -3,9 +3,12 @@
 --------------------------------------------------------------------------------------"""
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import Relation, RelationComp, RelationCap, RelationPro
+from django.contrib.admin.views.decorators import staff_member_required
 from elements.models import Element
 from general.models import Letter
+from decorators.views import user_privileges
 
 
 
@@ -13,7 +16,9 @@ from general.models import Letter
 """--------------------------------------------------------------------------------------
    Relations list
 --------------------------------------------------------------------------------------"""
-def relations_list(request):   
+@login_required
+@user_privileges
+def relations_list(request):      
    list_relations = Relation.objects.all()
    list_comp = RelationComp.objects.all()
    list_cap = RelationCap.objects.all()
@@ -32,6 +37,8 @@ def relations_list(request):
 """--------------------------------------------------------------------------------------
    Add and edit relation
 --------------------------------------------------------------------------------------"""
+@login_required
+@user_privileges
 def change_relation(request, action, id=0):
    if request.method == 'POST':
       vector = request.POST.get('input_data_form').split(",")
@@ -140,6 +147,8 @@ def save_elements(id, vector, model):
 """--------------------------------------------------------------------------------------
    Delete relation
 --------------------------------------------------------------------------------------"""
+@login_required
+@user_privileges
 def delete_relation(request):
    if request.method == 'POST':
       id_relation = request.POST.get('id_relation')

@@ -1,0 +1,44 @@
+<!-- --- Imports --- -->
+{% extends 'general/base.html' %}
+{% load static %}
+
+
+
+<!-- --- Block head --- -->
+{% block styles %}
+   <link rel="stylesheet" href="{% static 'css/users.css' %}">
+{% endblock styles %} 
+
+
+
+<!-- --- Block content --- -->
+{% block content %}
+<div id="div_user_title">
+   <h1>{{element}}</h1>
+   <label>Add user</label>
+</div>
+
+<div id="div_user_list">
+   {% for user in object_list %}
+      <div class="div_user_card">
+         <label class='title'>Username</label>
+         <label class='title'>Email</label>         
+         <label class="username content">{{user.username}}</label>                           
+         <label class="email content">{{user.email}}</label>         
+         <label class='title'>Name</label>
+         <label class='title'>Surname</label>         
+         <label class="name content">{{user.first_name}}</label>
+         <label class="name content">{{user.last_name}}</label>
+      </div>
+   {% endfor %}
+</div>
+{% endblock content %}
+
+
+
+
+
+
+
+
+
