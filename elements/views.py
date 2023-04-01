@@ -6,6 +6,9 @@ from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic import ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import AdditionalInformation, Element
 from general.models import Letter
 from django.contrib import messages
@@ -17,6 +20,39 @@ from decorators.views import user_privileges
 """--------------------------------------------------------------------------------------
     Element list
 --------------------------------------------------------------------------------------"""
+class ElementListView(ListView):
+	model = Element
+	template_name = 'elements/list.html'
+	context_object_name = 'elements'
+
+	def dispatch(self, request, *args, **kwargs):
+		print(f"Kwargs: {kwargs['element']}")
+		self.element = kwargs['element'] # Adding element variable to the class
+		return super().dispatch(request, *args, **kwargs)
+   
+	def get_queryset(self, **kwargs):		
+		return super().get_queryset().filter(type= self.element)
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context["title"] = self.element
+		context["element"] = self.element.capitalize()
+		return context
+			
+   
+   
+
+"""--------------------------------------------------------------------------------------
+    Create element
+--------------------------------------------------------------------------------------"""
+class ElementCreateView(SuccessMessageMixin, CreateView):
+	template_name = 'elements/add.html'
+	pass
+
+
+
+
+"""
 @login_required
 @user_privileges
 def element_list(request, element):
@@ -60,7 +96,7 @@ def element_list(request, element):
          'element':element,
          'list':list,
       })
-
+"""
 
 
 """--------------------------------------------------------------------------------------

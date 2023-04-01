@@ -12,18 +12,22 @@ from django.contrib.auth.models import User
     Element model
 --------------------------------------------------------------------------------------"""
 class Element(models.Model):
-   type = models.CharField(max_length=15, verbose_name='Element Type')
-   letter = models.ForeignKey(Letter, on_delete=models.CASCADE)
-   name = models.CharField(max_length=250, verbose_name='Competence name', null=False, blank=False)
-   comments = models.CharField(max_length=255, verbose_name='Comments', default='None')
-   eva_progress = models.IntegerField(default=0)
-   eva_made = models.IntegerField(default=0)
-   created = models.DateTimeField(auto_now=True)
-   updated = models.DateTimeField(auto_now_add=True)
+    type = models.CharField(max_length=15, verbose_name='Element Type')
+    letter = models.ForeignKey(Letter, on_delete=models.CASCADE)
+    name = models.CharField(max_length=250, verbose_name='Competence name', null=False, blank=False)
+    comments = models.CharField(max_length=255, verbose_name='Comments', default='None')
+    eva_progress = models.IntegerField(default=0)
+    eva_made = models.IntegerField(default=0)
+    created = models.DateTimeField(auto_now=True)
+    updated = models.DateTimeField(auto_now_add=True)
    
 
-   class Meta:
+    class Meta:
       ordering = ('letter', 'name', 'created')
+
+    def __str__(self):
+        return self.name
+    
 
 
 

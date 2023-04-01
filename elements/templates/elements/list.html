@@ -1,0 +1,88 @@
+<!-- --- Imports --- -->
+{% extends 'general/base.html' %}
+{% load static %}
+
+
+
+<!-- --- Links --- -->
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/list.css' %}">
+{% endblock styles %}
+
+
+
+<!-- --- Additional menu --- -->
+{% block additional_menu %}
+    <div id="div_elements_title">
+        <h1>{{element}}</h1>
+
+        <a href="{% url 'elements:add' %}">Add</a>
+
+        <select id="select_letters">
+            <option value="0">All</option>
+            {% for element in elements %}
+                {% ifchanged element.letter.id %}
+                    <option value="{{element.letter.id}}">{{element.letter.name}}</option>
+                {% endifchanged %}                
+            {% endfor %}
+        </select>
+
+        <label for="">Count<br/><span id="count_elements">{{elements|length}}</span></label>
+    </div>
+{% endblock additional_menu %}
+
+
+<!-- --- Content --- -->
+{% block content %}
+    <div id="div_element_card">
+        {% for element in elements %}
+            <div class="div_individual_card">
+                <div class="div_letter">
+                    {{element.letter}}
+                </div>
+
+                <div class="div_name">
+                    <label>Name</label>
+                    <br>
+                    <textarea rows="2" disabled>{{element.name}}</textarea>
+                </div>
+
+                <div class="div_progress">
+                    <input type="text" value="{{element.eva_progress}}" disabled>
+                </div>
+
+                <div class="div_made">
+                    <input type="text" value="{{element.eva_made}}" disabled>
+                </div>
+
+                <div class="div_actions">
+                    {% if element.type == 'processes' %}
+                        <button class="button">More info</button>
+                    {% else %}
+                        <button disabled>More info</button>
+                    {% endif %}
+                    
+                    {% if element.eva_made > 0 or element.eva_progress > 0 %}
+                        <button disabled>Edit</button>
+                        <button disabled>Delete</button>
+                    {% else %}
+                        <button class="button">Edit</button>
+                        <button class="button btn_delete">Delete</button>
+                    {% endif %}                    
+                </div>                
+            </div>            
+        {% endfor %}
+    </div>    
+{% endblock content %}
+
+
+
+<!-- --- Scripts --- -->
+{% block scripts %}
+    <script src="{% static 'js/list.js' %}"></script>
+{% endblock scripts %}
+
+
+
+
+

@@ -1,0 +1,149 @@
+/* --- Generic styles --- */
+textarea {
+    width: 95%;
+    font-size: 1.3rem;    
+    border: none;
+    background-color: white;
+    padding: 0.5rem;
+    overflow: auto;
+    resize: none;
+}
+
+input {
+    width: 95%;
+    font-size: 1.3rem;
+    height: 3rem;
+    border: none;
+    background-color: white;
+    padding: 0.5rem;
+}
+
+
+
+
+/* --- Title --- */
+#div_elements_title {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    align-items: center;
+    width: 72%;
+    height: 8rem;
+    margin: 0 auto;
+    text-align: center;
+    position: fixed;    
+    top: 8.5rem; /* Stay on top */
+    left: 14%;
+    transition: top 0.4s; /* Transition effect when sliding down (and up) */
+    background-color: white;
+}
+    #div_elements_title label {
+        font-size: 1.3rem;
+    }
+
+    #div_elements_title a {
+        height: 3rem;
+        width: 6rem;
+        font-size: 1.3rem;
+        border: none;
+        background-color: white;
+        text-decoration: none;
+        color: black;
+    }
+        #div_elements_title button:hover {
+            font-weight: bold;
+            cursor: pointer;
+        }
+    
+    #div_elements_title select {
+        width: 6rem;
+        height: 3rem;
+        font-size: 1.3rem;
+        text-align: center;
+        border: none;
+        background-color: white;
+    }
+
+
+
+
+
+/* --- Parent card element --- */
+#div_element_card {
+    display: block;
+    width: 70%;
+    margin: 17rem auto 0 auto;
+}
+
+
+
+
+/* --- Parent individual card --- */
+.div_individual_card {
+    display: grid;
+    grid-template-columns: 8% 70% 8% 14%;
+    grid-template-rows: repeat(2, 1fr);
+    margin: 0 auto 1rem auto;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--contrast_100);
+}
+
+.div_letter {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.div_name {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;    
+}
+    .div_name label {
+        font-size: 1.1rem;
+        color: gray;
+    }    
+
+.div_made {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;    
+}
+
+.div_made, .div_progress {
+    display: flex;
+    justify-content: center;
+}
+    .div_made input, .div_progress input {
+        width: 50%;
+        text-align: center;
+    }
+
+.div_actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    justify-content: center;
+    align-items: center;
+    grid-column: 4 / 5;
+    grid-row: 1 / 3;
+}
+
+    .div_actions button {
+        width: 90%;
+        font-size: 1.1rem;
+        padding: 0.5rem;
+        border: none;
+        background-color: white;
+    }
+
+.button:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn_delete:hover {
+    color: red;
+}
+
