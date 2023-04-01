@@ -1,42 +1,30 @@
-{% if user.profile.type.type == 1 %}
-   <div class="items_menu">      
-      <a href="{% url 'evaluations:evaluations' %}">Evaluations</a>
-      <a href="{% url 'companies:companies' %}">Companies</a>         
-      <a class="last" href="{% url 'logout' %}">Log out</a>
-      <a class="last" href="{% url 'password_reset' %}">Reset Password</a>
-   </div>
+<div class="navbar">
+    <a href="{% url 'evaluations:evaluations' %}">Evaluations</a>
+    <a href="{% url 'companies:companies' %}">Companies</a>              
 
-{% elif user.profile.type == 2 %}
-   <div class="items_menu">
-      <a href="{% url 'relations:relations' %}">Relations tree</a>        
-      <a href="{% url 'elements:elements' element='competences' %}">Competences</a>
-      <a href="{% url 'elements:elements' element='capabilities' %}">Capabilities</a>                
-      <a href="{% url 'elements:elements' element='processes' %}">Processes</a>
-      <a href="{% url 'evaluations:evaluations' %}">Evaluations</a>
-      <a href="{% url 'companies:companies' %}">Companies</a>         
-      <a class="last" href="{% url 'logout' %}">Log out</a>
-      <a class="last" href="{% url 'password_reset' %}">Reset Password</a>
-   </div>
-{% else %}
+    {% if user.profile.type.type > 1 %}
+        <div class="dropdown">
+            <button class="dropbtn">
+                Elements<i class="fa fa-caret-down"></i>
+            </button>
 
-   <div class="items_menu">
-      <a href="{% url 'relations:relations' %}">Relations tree</a>        
-      <a href="{% url 'elements:elements' element='competences' %}">Competences</a>
-      <a href="{% url 'elements:elements' element='capabilities' %}">Capabilities</a>                
-      <a href="{% url 'elements:elements' element='processes' %}">Processes</a>
-      <a href="{% url 'evaluations:evaluations' %}">Evaluations</a>
-      <a href="{% url 'companies:companies' %}">Companies</a>   
-      <a href="{% url 'users:users' %}">Users</a>   
-      <a href="#">Administration</a>   
-      <a class="last" href="{% url 'logout' %}">Log out</a>
-      <a class="last" href="{% url 'password_reset' %}">Reset Password</a>
-   </div>
-{% endif %}
+            <div class="dropdown-content">
+            <a href="{% url 'relations:relations' %}">Relations tree</a>
+            <a href="{% url 'elements:elements' element='competences' %}">Competences</a>
+            <a href="{% url 'elements:elements' element='capabilities' %}">Capabilities</a>
+            <a href="{% url 'elements:elements' element='processes' %}">Processes</a>
+            </div>      
+        </div>    
+    {% endif %}
 
+    {% if user.profile.type.type > 2 %}
+        <a href="{% url 'users:users' %}">Users</a>
+        <a href="#">Administration</a>
+    {% endif %}
 
-
-
-
+    <a href="{% url 'logout' %}">Log out</a>
+    <a class="last" href="{% url 'password_reset' %}">Reset Password</a>
+</div>   
 
 
 

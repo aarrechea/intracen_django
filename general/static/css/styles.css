@@ -1,26 +1,6 @@
-/* --- Variables --- */
-/*:root {
-    --brown_100: rgba(255, 210, 128, 1);
-    --brown_80: rgba(255, 210, 128, 0.8);
-    --brown_60: rgba(255, 210, 128, 0.6);
-    --brown_40: rgba(255, 210, 128, 0.4);
-    --brown_20: rgba(255, 210, 128, 0.2);
-    --contrast_100: rgba(179, 141, 90, 1);
-    --contrast_80: rgba(179, 141, 90, 0.8);
-    --contrast_60: rgba(179, 141, 90, 0.6);
-    --contrast_40: rgba(179, 141, 90, 0.4);
-    --contrast_20: rgba(179, 141, 90, 0.2);
-    --green_100: rgba(56, 142, 60, 1);
-    --green_80: rgba(56, 142, 60, 0.8);
-    --green_60: rgba(56, 142, 60, 0.6);
-    --green_40: rgba(56, 142, 60, 0.4);
-    --green_20: rgba(56, 142, 60, 0.2);}
-*/
-
-
-
 /* ----- General styles ----- */
 body {
+    font-family: Arial, Helvetica, sans-serif;
     margin: 0;}
 
 p {
@@ -73,15 +53,15 @@ body td {
 
 /* ----- Menu bar styles ----- */
 .background_menu {
-    display: grid;    
-    grid-template-columns: 1fr;    
+    display: grid;
+    grid-template-columns: 1fr;
     justify-items: center;
     align-items: center;
     height: 5rem;
     width: 100%;
     margin: 0 auto;
     position: fixed; /* Make it stick/fixed */
-    top: 0; /* Stay on top */    
+    top: 0; /* Stay on top */
     transition: top 0.4s; /* Transition effect when sliding down (and up) */
     background-color: var(--brown_100);}
 
@@ -97,9 +77,13 @@ body td {
         text-align: center;           
         font-size: 1.5rem;}
 
+
+
+
+/* --- Options menu ---  */
 #div_include_general_menu {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr;    
     justify-content: center;
     align-items: center;
     margin: 0 auto;
@@ -110,29 +94,82 @@ body td {
     transition: top 0.4s; /* Transition effect when sliding down (and up) */
     background-color: var(--brown_100);}
     
-    .items_menu {
-        display: flex;
-        justify-content:left;
-        align-items: center;        
-        margin: 0 auto;
-        height: 100%;
-        padding: 0.5rem;
-        width: 70%;}
+.navbar {
+    overflow: hidden;
+    width: 70%;
+    margin: 0 auto;
+    background-color: var(--brown_100);}
+    
+    .navbar a {
+        float: left;
+        font-size: 16px;
+        color: black;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;}
+    
+.dropdown {
+    float: left;
+    text-align: center;
+    overflow: hidden;}
+    
+    .dropdown .dropbtn {
+        font-size: 16px;  
+        border: none;
+        outline: none;
+        color: black;
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit;        
+        margin: 0;}
+    
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: var(--contrast_100);}
+    
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;}
+    
+    .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;}
+    
+        .dropdown-content a:hover {
+            background-color: #ddd;}
+    
+    .dropdown:hover .dropdown-content {
+        display: block;}
+      
 
-        .items_menu span,
-        .items_menu a {       
-            display: flex; 
-            font-size: 1.3rem;
-            text-align: left;
-            margin-right: 1.2rem;
-            text-decoration: none;
-            color: black;}
-        
-        .items_menu a:hover {  
-            font-size: 1.3rem;
-            color: blue;
-            cursor: pointer;}
 
+
+/* --- Responsive design --- */
+@media only screen and (max-width: 1200px) {
+    .bar_menu {                
+        width: 35%;        
+        column-gap: 1rem;}
+
+    #div_include_general_menu {
+        height: 7rem;}
+
+    .navbar {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: auto;        
+        width: 50%;}
+
+    .last {
+        grid-column: 3 / 5;
+        grid-row: 2 / 3;}
+}
 
 
 
