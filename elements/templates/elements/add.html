@@ -1,0 +1,45 @@
+<!-- --- Imports --- -->
+{% load static %}
+
+
+<!-- --- Html --- -->
+<!DOCTYPE html>
+<html lang="en">
+    <!-- --- Head --- -->
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/add.css' %}">
+        <link rel="stylesheet" href="{% static 'css/colors.css' %}">
+        <title>Add {{singular}}</title>
+    </head>
+
+
+    <!-- --- Body --- -->
+    <body>
+        <div id="div_add_element_title">
+            <h1>Add {{singular}}</h1>
+        </div>                
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+                            
+            <label for="{{form.letter.id_for_label}}">Letter</label>
+            {{form.letter}}
+            {{form.letter.errors}}
+
+            <label for="{{form.name.id_for_label}}">{{singular|capfirst}} name</label>
+            {{form.name}}
+            {{form.name.errors}}            
+
+            <div id="div_buttons">
+                <input type="submit" value="Create">
+                <a href="{% url 'elements:elements' element singular %}">Back</a>
+            </div>            
+        </form>        
+    </body>
+</html>
+
+

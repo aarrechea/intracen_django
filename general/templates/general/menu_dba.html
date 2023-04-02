@@ -10,9 +10,9 @@
 
             <div class="dropdown-content">
             <a href="{% url 'relations:relations' %}">Relations tree</a>
-            <a href="{% url 'elements:elements' element='competences' %}">Competences</a>
-            <a href="{% url 'elements:elements' element='capabilities' %}">Capabilities</a>
-            <a href="{% url 'elements:elements' element='processes' %}">Processes</a>
+            <a href="{% url 'elements:elements' element='competences' singular='competence' %}">Competences</a>
+            <a href="{% url 'elements:elements' element='capabilities' singular='capability' %}">Capabilities</a>
+            <a href="{% url 'elements:elements' element='processes' singular='process' %}">Processes</a>
             </div>      
         </div>    
     {% endif %}

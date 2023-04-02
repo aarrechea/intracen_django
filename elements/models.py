@@ -46,6 +46,9 @@ class AdditionalInformation(models.Model):
     assess_five = models.TextField(default="None")
     add_info = models.OneToOneField(Element, on_delete=models.CASCADE, null=True, blank=True)
    
+    def __str__(self):
+        return self.add_info.element.name
+   
 
 
 

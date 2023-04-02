@@ -1,0 +1,105 @@
+/* --- Title --- */
+#div_add_element_title {
+    display: block;
+    width: 70%;
+    margin: 3rem auto 0 auto;
+    text-align: center;
+}
+
+
+
+
+/* --- Form --- */
+form {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    row-gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin: 3rem auto 0 auto;    
+}
+
+form label {
+    font-size: 1.2rem;
+    margin-top: 3rem;
+}
+
+form label:nth-child(2) {
+    width: auto;
+    text-align: center;
+}
+
+select {    
+    width: 6rem;
+    text-align: center;    
+    background-color: white;
+    border: none;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 1.3rem;
+    padding: 1rem;
+    border-bottom: 2px solid var(--contrast_100);
+}
+
+form label:nth-child(4) {    
+    width: 70%;
+    margin: 3rem auto 0 auto;
+}
+
+textarea {
+    width: 70%;
+    resize: none;
+    font-size: 1.3rem;
+    padding: 1rem;
+    border: none;
+    border-left: 1px solid var(--contrast_100);
+    margin: 0 auto;
+}
+
+
+
+
+/* --- Buttons --- */
+#div_buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    margin: 3rem auto 0 auto;
+    text-align: center;
+}    
+
+input {    
+    width: 6rem;
+    font-size: 1.3rem;
+    padding: 1rem;
+    border: none;
+    border-bottom: 2px solid var(--contrast_100);
+    background-color: white;
+    margin: 0 auto;
+}
+    input:hover {
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+a {
+    width: 6rem;
+    font-size: 1.3rem;
+    padding: 1rem;
+    border: none;
+    border-bottom: 2px solid var(--contrast_100);
+    background-color: white;
+    margin: 0 auto;
+    text-decoration: none;
+    color: black;    
+}
+    a:hover {
+        font-weight: bold;
+        cursor: pointer;                
+    }
+
+

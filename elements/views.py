@@ -9,7 +9,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.utils.decorators import method_decorator
 from .models import AdditionalInformation, Element
+from .forms import ElementForm
 from general.models import Letter
 from django.contrib import messages
 from decorators.views import user_privileges
@@ -26,8 +28,8 @@ class ElementListView(ListView):
 	context_object_name = 'elements'
 
 	def dispatch(self, request, *args, **kwargs):
-		print(f"Kwargs: {kwargs['element']}")
-		self.element = kwargs['element'] # Adding element variable to the class
+		self.element = kwargs['element']
+		self.singular = kwargs['singular']
 		return super().dispatch(request, *args, **kwargs)
    
 	def get_queryset(self, **kwargs):		
@@ -37,6 +39,7 @@ class ElementListView(ListView):
 		context = super().get_context_data(**kwargs)
 		context["title"] = self.element
 		context["element"] = self.element.capitalize()
+		context["singular"] = self.singular
 		return context
 			
    
@@ -45,10 +48,27 @@ class ElementListView(ListView):
 """--------------------------------------------------------------------------------------
     Create element
 --------------------------------------------------------------------------------------"""
+@method_decorator(login_required, name='dispatch')
 class ElementCreateView(SuccessMessageMixin, CreateView):
 	template_name = 'elements/add.html'
-	pass
+	form_class = ElementForm	
+	success_url = reverse_lazy('elements:elements')
+	success_message = 'The element was succesfully created'	
 
+	def dispatch(self, request, *args, **kwargs):
+		self.element = kwargs['element'].lower()
+		self.singular = kwargs['singular']
+
+		print(f"Element: {self.element} - Singular: {self.singular}")
+
+		return super().dispatch(request, *args, **kwargs)
+	
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context["element"] = self.element
+		context["singular"] = self.singular
+		return context
+	
 
 
 

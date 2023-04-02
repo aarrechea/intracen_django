@@ -15,9 +15,9 @@
 {% block additional_menu %}
     <div id="div_elements_title">
         <h1>{{element}}</h1>
-
-        <a href="{% url 'elements:add' %}">Add</a>
-
+        
+        <a href="{% url 'elements:add' element singular %}">Add</a>
+        
         <select id="select_letters">
             <option value="0">All</option>
             {% for element in elements %}
