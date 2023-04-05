@@ -14,13 +14,13 @@ from user_profile.models import UserType, Profile
       decorator is implemented
 --------------------------------------------------------------------------------------"""
 def user_privileges(func):
-   def wrapped(request):
+   def wrapped(request, *args, **kwargs):
       user_type = request.user.profile.type.type
       
       if user_type == 1:
          return redirect('logout')
       else:
-         return func(request)
+         return func(request, *args, **kwargs)
 
    return wrapped
 

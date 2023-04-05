@@ -10,6 +10,7 @@ from countries.models import Country, Continent, Region
 from industries.models import Subsector, Sector, Supersector, Industry
 
 
+
 # --- Tests
 class TestModelsCompany(TestCase):
     @classmethod
@@ -40,6 +41,7 @@ class TestModelsCompany(TestCase):
         self.assertEqual(max_length, 150)    
 
 
+
 # --- Form tests ---    
 class FormsTest(TestCase):
     def test_check_comments_textarea(self):
@@ -51,17 +53,19 @@ class FormsTest(TestCase):
 class ViewTests(TestCase):
     @classmethod
     def setUpTestData(cls):        
-        user = User(username='user_1', password='password_')
+        user = User.objects.create_user(username='user_1', password='password_')
+        user_type = UserType()
+        user.type = user_type
         user.save()
-        continet = Continent.objects.create(name="America")
+        continent = Continent.objects.create(name="America")
         region = Region.objects.create(name="AUSTRALASIA")
-        country = Country.objects.create(name='AUSTRALIA', inhabitants=3000, continent=continet, region=region)
+        country = Country.objects.create(name='AUSTRALIA', inhabitants=3000, continent=continent, region=region)
         industry = Industry.objects.create(name='Industry Parts')
         supersector = Supersector.objects.create(name='Supersector Parts', industry=industry)
         sector = Sector.objects.create(name='Sector Parts', supersector=supersector)
         subsector = Subsector.objects.create(name='Subsector Parts', sector=sector)
         number_of_companies = 13
-
+        
         for company in range(number_of_companies):
             Company.objects.create(
                 name=f'Company {company}',
@@ -69,21 +73,29 @@ class ViewTests(TestCase):
                 subsector=subsector
             )
 
-    def test_view_url_exists_at_desired_location(self):        
+    def test_view_url_exists_at_desired_location(self):
+        login = self.client.login(username='user_1', password='password_')
         response = self.client.get('/companies/')        
         self.assertEqual(response.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
+        login = self.client.login(username='user_1', password='password_')
         response = self.client.get(reverse('companies:companies'))
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
+        login = self.client.login(username='user_1', password='password_')
         response = self.client.get(reverse('companies:companies'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'companies/company_list.html')    
 
     def test_lists_all_authors(self):
         # Get second page and confirm it has (exactly) remaining 3 items
+        login = self.client.login(username='user_1', password='password_')
         response = self.client.get(reverse('companies:companies'))
         self.assertEqual(response.status_code, 200)        
         self.assertEqual(len(response.context['company_list']), 13)
+
+
+
+# --- Testing wiews ---

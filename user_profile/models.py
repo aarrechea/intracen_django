@@ -24,7 +24,7 @@ class UserType(models.Model):
 --------------------------------------------------------------------------------------"""
 class Profile(models.Model):
    user = models.OneToOneField(User, on_delete=models.CASCADE)
-   type = models.ForeignKey(UserType, on_delete=models.CASCADE)
+   type = models.ForeignKey(UserType, on_delete=models.CASCADE, null=True)
    evaluation_closed = models.SmallIntegerField(default=0)
    evaluation_started = models.SmallIntegerField(default=0)
 

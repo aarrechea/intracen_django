@@ -25,7 +25,7 @@ class Continent(models.Model):
     Country model
 --------------------------------------------------------------------------------------"""
 class Country(models.Model):
-   name = name = models.CharField(max_length=150)
+   name = name = models.CharField(max_length=150, verbose_name='Country')
    inhabitants = models.IntegerField(default=0)
    continent = models.ForeignKey(Continent, on_delete=models.CASCADE)
    region = models.ForeignKey(Region, on_delete=models.CASCADE)
