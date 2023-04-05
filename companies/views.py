@@ -20,7 +20,7 @@ from industries.models import Industry, Supersector, Sector, Subsector
 """--------------------------------------------------------------------------------------
    Companies list
 --------------------------------------------------------------------------------------"""
-@method_decorator(login_required, name='dispatch')
+#@method_decorator(login_required, name='dispatch')
 class CompaniesListView(ListView):
    model = Company
    template_name = 'company_list.html'
