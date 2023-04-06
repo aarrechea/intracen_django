@@ -12,8 +12,8 @@ from .views import ElementListView, ElementCreateView
     Patterns
 --------------------------------------------------------------------------------------"""
 elements_patterns = ([
-    path('elements/<str:element>/<str:singular>/', ElementListView.as_view() , name='elements'),
-    path('element/add/<str:element>/<str:singular>/', ElementCreateView.as_view() , name='add'),
+    path('elements/list/<str:element>/<str:singular>/', ElementListView.as_view() , name='elements'),    
+    path('elements/add/<str:element>/<str:singular>/', ElementCreateView.as_view() , name='add'),    
 ], 'elements')
 
 

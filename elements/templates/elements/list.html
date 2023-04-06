@@ -14,7 +14,7 @@
 <!-- --- Additional menu --- -->
 {% block additional_menu %}
     <div id="div_elements_title">
-        <h1>{{element}}</h1>
+        <h1>{{element|capfirst}}</h1>
         
         <a href="{% url 'elements:add' element singular %}">Add</a>
         
@@ -23,7 +23,7 @@
             {% for element in elements %}
                 {% ifchanged element.letter.id %}
                     <option value="{{element.letter.id}}">{{element.letter.name}}</option>
-                {% endifchanged %}                
+                {% endifchanged %}
             {% endfor %}
         </select>
 
@@ -35,8 +35,9 @@
 <!-- --- Content --- -->
 {% block content %}
     <div id="div_element_card">
-        {% for element in elements %}
+        {% for element in elements %}            
             <div class="div_individual_card">
+                <input hidden class="input_letter_hidden" type="text" value="{{element.letter.id}}">
                 <div class="div_letter">
                     {{element.letter}}
                 </div>
@@ -73,14 +74,12 @@
             </div>            
         {% endfor %}
     </div>    
-{% endblock content %}
 
 
-
-<!-- --- Scripts --- -->
-{% block scripts %}
+    <!-- --- Scripts ----->
+    <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/list.js' %}"></script>
-{% endblock scripts %}
+{% endblock content %}
 
 
 

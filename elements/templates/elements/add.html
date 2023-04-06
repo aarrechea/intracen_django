@@ -18,6 +18,10 @@
 
     <!-- --- Body --- -->
     <body>
+        {% if message %}
+            {{message}}
+        {% endif %}
+
         <div id="div_add_element_title">
             <h1>Add {{singular}}</h1>
         </div>                
@@ -26,18 +30,23 @@
             {% csrf_token %}
             {{ form.non_field_errors }}
                             
-            <label for="{{form.letter.id_for_label}}">Letter</label>
-            {{form.letter}}
-            {{form.letter.errors}}
+            <div id="div_form_main">
+                <label for="{{form.letter.id_for_label}}">Letter</label>
+                <label for="{{form.name.id_for_label}}">{{singular|capfirst}} name</label>
 
-            <label for="{{form.name.id_for_label}}">{{singular|capfirst}} name</label>
-            {{form.name}}
-            {{form.name.errors}}            
+                {{form.letter}}
+                {{form.letter.errors}}
+                
+                {{form.name}}
+                {{form.name.errors}}
+            </div>            
 
+            {{form.type}}
+            
             <div id="div_buttons">
                 <input type="submit" value="Create">
                 <a href="{% url 'elements:elements' element singular %}">Back</a>
-            </div>            
+            </div>                        
         </form>        
     </body>
 </html>

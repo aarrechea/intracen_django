@@ -1,9 +1,10 @@
 /* --- Title --- */
 #div_add_element_title {
     display: block;
-    width: 70%;
+    width: 80%;
     margin: 3rem auto 0 auto;
     text-align: center;
+    height: 4rem;
 }
 
 
@@ -17,8 +18,17 @@ form {
     row-gap: 1rem;
     justify-content: center;
     align-items: center;
-    width: 70%;
-    margin: 3rem auto 0 auto;    
+    width: 80%;
+    margin: 2rem auto 0 auto;    
+}
+
+#div_form_main {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-auto-rows: auto;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 form label {
@@ -27,8 +37,8 @@ form label {
 }
 
 form label:nth-child(2) {
-    width: auto;
-    text-align: center;
+    margin: 0.5rem 0 0 4rem;
+    text-align: left;
 }
 
 select {    
@@ -49,7 +59,7 @@ form label:nth-child(4) {
 }
 
 textarea {
-    width: 70%;
+    width: 90%;
     resize: none;
     font-size: 1.3rem;
     padding: 1rem;

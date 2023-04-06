@@ -2,6 +2,7 @@
     Imports
 --------------------------------------------------------------------------------------"""
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -24,7 +25,7 @@ from decorators.views import user_privileges
 --------------------------------------------------------------------------------------"""
 class ElementListView(ListView):
 	model = Element
-	template_name = 'elements/list.html'
+	template_name = 'elements/list.html'   
 	context_object_name = 'elements'
 
 	def dispatch(self, request, *args, **kwargs):
@@ -36,9 +37,8 @@ class ElementListView(ListView):
 		return super().get_queryset().filter(type= self.element)
 
 	def get_context_data(self, **kwargs):
-		context = super().get_context_data(**kwargs)
-		context["title"] = self.element
-		context["element"] = self.element.capitalize()
+		context = super().get_context_data(**kwargs)		
+		context["element"] = self.element
 		context["singular"] = self.singular
 		return context
 			
@@ -50,24 +50,29 @@ class ElementListView(ListView):
 --------------------------------------------------------------------------------------"""
 @method_decorator(login_required, name='dispatch')
 class ElementCreateView(SuccessMessageMixin, CreateView):
-	template_name = 'elements/add.html'
-	form_class = ElementForm	
-	success_url = reverse_lazy('elements:elements')
-	success_message = 'The element was succesfully created'	
+   template_name = 'elements/add.html'
+   form_class = ElementForm
+   success_message = 'The element was succesfully created'
 
-	def dispatch(self, request, *args, **kwargs):
-		self.element = kwargs['element'].lower()
-		self.singular = kwargs['singular']
+   def dispatch(self, request, *args, **kwargs):
+      self.element = kwargs['element']
+      self.singular = kwargs['singular']
+      return super().dispatch(request, *args, **kwargs)
 
-		print(f"Element: {self.element} - Singular: {self.singular}")
+   def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)
+      context["element"] = self.element
+      context["singular"] = self.singular
+      return context
+   
+   def get_success_url(self):      
+      return reverse_lazy("elements:elements", kwargs={"element":self.element, "singular":self.singular})
 
-		return super().dispatch(request, *args, **kwargs)
-	
-	def get_context_data(self, **kwargs):
-		context = super().get_context_data(**kwargs)
-		context["element"] = self.element
-		context["singular"] = self.singular
-		return context
+   def get_initial(self):
+      return {'type':self.element}
+   
+
+      
 	
 
 

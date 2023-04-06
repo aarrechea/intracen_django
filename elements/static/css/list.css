@@ -26,14 +26,14 @@ input {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     justify-content: center;
-    align-items: center;
-    width: 72%;
+    align-items: center;    
+    width: 82%;
     height: 8rem;
     margin: 0 auto;
     text-align: center;
     position: fixed;    
     top: 8.5rem; /* Stay on top */
-    left: 14%;
+    left: 9%;
     transition: top 0.4s; /* Transition effect when sliding down (and up) */
     background-color: white;
 }
@@ -49,6 +49,7 @@ input {
         background-color: white;
         text-decoration: none;
         color: black;
+        margin: 0 auto;
     }
         #div_elements_title button:hover {
             font-weight: bold;
@@ -62,6 +63,7 @@ input {
         text-align: center;
         border: none;
         background-color: white;
+        margin: 0 auto;
     }
 
 
@@ -70,8 +72,13 @@ input {
 
 /* --- Parent card element --- */
 #div_element_card {
-    display: block;
-    width: 70%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: auto;
+    column-gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
     margin: 17rem auto 0 auto;
 }
 
@@ -132,7 +139,7 @@ input {
 
     .div_actions button {
         width: 90%;
-        font-size: 1.1rem;
+        font-size: 1rem;
         padding: 0.5rem;
         border: none;
         background-color: white;
@@ -141,9 +148,19 @@ input {
 .button:hover {
     font-weight: bold;
     cursor: pointer;
+    font-size: 1rem;
 }
 
 .btn_delete:hover {
     color: red;
 }
 
+
+
+/* --- Responsive --- */
+@media only screen and (max-width: 1200px) {
+    #div_element_card {        
+        grid-template-columns: 1fr;        
+        width: 50%;
+    }
+}

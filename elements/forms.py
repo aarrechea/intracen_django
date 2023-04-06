@@ -12,9 +12,9 @@ from .models import Element, AdditionalInformation
 class ElementForm(forms.ModelForm):   
    class Meta:                  
       model = Element
-      fields = ['letter', 'name']
+      fields = ['letter', 'name', 'type']
 
-      widgets = {        
+      widgets = {
         'name': forms.Textarea(attrs={'rows':'2'})
       }
 
