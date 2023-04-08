@@ -1,4 +1,4 @@
-// Select letters on change
+// --- Select letters on change
 $("#select_letters").change(function() {
     let letter = $(this).val()
     let total_cards = $(".div_individual_card").length    
@@ -18,5 +18,6 @@ $("#select_letters").change(function() {
 
     $("#count_elements").text(total_cards)
 })
+
 
 

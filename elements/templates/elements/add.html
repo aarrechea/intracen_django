@@ -23,31 +23,76 @@
         {% endif %}
 
         <div id="div_add_element_title">
-            <h1>Add {{singular}}</h1>
+            <h1>Add {{singular}}</h1>            
         </div>                
 
         <form method="post">
             {% csrf_token %}
             {{ form.non_field_errors }}
+            {{form.element_type}}
+            {{form.element_type.errors}}
                             
             <div id="div_form_main">
-                <label for="{{form.letter.id_for_label}}">Letter</label>
-                <label for="{{form.name.id_for_label}}">{{singular|capfirst}} name</label>
+                <label>Letter</label>
+                <label>Name</label>
 
                 {{form.letter}}
                 {{form.letter.errors}}
-                
+
                 {{form.name}}
                 {{form.name.errors}}
-            </div>            
+            </div>
 
-            {{form.type}}
+            {% if element == 'processes' %}
+                <div id="div_additional_information">
+                    <label for="{{form.definitions.id_for_label}}">Definitions</label>
+                    {{form.definitions}}
+                    {{form.definitions.errors}}
+
+                    <label for="{{form.symptoms.id_for_label}}">Symptoms</label>
+                    {{form.symptoms}}
+                    {{form.symptoms.errors}}
+
+                    <label for="{{form.questions.id_for_label}}">Questions</label>
+                    {{form.questions}}
+                    {{form.questions.errors}}
+
+                    <label for="{{form.assess_one.id_for_label}}">Assess one</label>
+                    {{form.assess_one}}
+                    {{form.assess_one.errors}}
+
+                    <label for="{{form.assess_two.id_for_label}}">Assess two</label>
+                    {{form.assess_two}}
+                    {{form.assess_two.errors}}
+
+                    <label for="{{form.assess_three.id_for_label}}">Assess three</label>
+                    {{form.assess_three}}
+                    {{form.assess_three.errors}}
+
+                    <label for="{{form.assess_four.id_for_label}}">Assess four</label>
+                    {{form.assess_four}}
+                    {{form.assess_four.errors}}
+
+                    <label for="{{form.assess_five.id_for_label}}">Assess five</label>
+                    {{form.assess_five}}
+                    {{form.assess_five.errors}}
+
+                </div>            
+            {% endif %}
             
             <div id="div_buttons">
                 <input type="submit" value="Create">
                 <a href="{% url 'elements:elements' element singular %}">Back</a>
             </div>                        
-        </form>        
+        </form>
+
+        {% if message %}
+            Message: {{message}}
+        {% endif %}
+
+        <!-- --- Scrips --- -->
+        <script src="{% static 'js/jquery.js' %}"></script>
+        <script src="{% static 'js/add.js' %}"></script>
     </body>
 </html>
 

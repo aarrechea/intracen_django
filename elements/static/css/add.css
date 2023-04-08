@@ -1,10 +1,14 @@
 /* --- Title --- */
 #div_add_element_title {
     display: block;
-    width: 80%;
-    margin: 3rem auto 0 auto;
+    width: 100%;
+    margin: 0 auto;
     text-align: center;
-    height: 4rem;
+    padding: 1rem;
+    position: fixed;
+    background-color: white;
+    top: 0;
+    left: 0;
 }
 
 
@@ -19,7 +23,7 @@ form {
     justify-content: center;
     align-items: center;
     width: 80%;
-    margin: 2rem auto 0 auto;    
+    margin: 6rem auto 0 auto;
 }
 
 #div_form_main {
@@ -29,6 +33,8 @@ form {
     justify-content: center;
     align-items: center;
     text-align: center;
+    width: 85%;
+    margin: 0 auto;
 }
 
 form label {
@@ -64,9 +70,26 @@ textarea {
     font-size: 1.3rem;
     padding: 1rem;
     border: none;
-    border-left: 1px solid var(--contrast_100);
+    border-left: 2px solid var(--contrast_100);
     margin: 0 auto;
+    overflow: auto;
 }
+
+
+
+
+/* --- Additional information --- */
+#div_additional_information {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    row-gap: 1rem;
+    width: 80%;
+    margin: 3rem auto 0 auto;
+}
+    #div_additional_information label {
+        padding-left: 3rem;
+    }
 
 
 
@@ -78,7 +101,7 @@ textarea {
     justify-content: center;
     align-items: center;
     width: 30%;
-    margin: 3rem auto 0 auto;
+    margin: 3rem auto 15rem auto;
     text-align: center;
 }    
 

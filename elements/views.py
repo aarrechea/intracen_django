@@ -12,7 +12,7 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.utils.decorators import method_decorator
 from .models import AdditionalInformation, Element
-from .forms import ElementForm
+from .forms import ElementForm, AdditionalInformationForm
 from general.models import Letter
 from django.contrib import messages
 from decorators.views import user_privileges
@@ -34,7 +34,7 @@ class ElementListView(ListView):
 		return super().dispatch(request, *args, **kwargs)
    
 	def get_queryset(self, **kwargs):		
-		return super().get_queryset().filter(type= self.element)
+		return super().get_queryset().filter(element_type= self.element)
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)		
@@ -46,17 +46,17 @@ class ElementListView(ListView):
    
 
 """--------------------------------------------------------------------------------------
-    Create element
+   Create element
 --------------------------------------------------------------------------------------"""
 @method_decorator(login_required, name='dispatch')
-class ElementCreateView(SuccessMessageMixin, CreateView):
+class ElementCreateView(SuccessMessageMixin, CreateView):   
    template_name = 'elements/add.html'
    form_class = ElementForm
    success_message = 'The element was succesfully created'
 
    def dispatch(self, request, *args, **kwargs):
       self.element = kwargs['element']
-      self.singular = kwargs['singular']
+      self.singular = kwargs['singular']      
       return super().dispatch(request, *args, **kwargs)
 
    def get_context_data(self, **kwargs):
@@ -68,65 +68,19 @@ class ElementCreateView(SuccessMessageMixin, CreateView):
    def get_success_url(self):      
       return reverse_lazy("elements:elements", kwargs={"element":self.element, "singular":self.singular})
 
-   def get_initial(self):
-      return {'type':self.element}
+   def get_initial(self):      
+      return {'element_type':self.element}
    
 
+   
       
-	
 
-
-
-"""
-@login_required
-@user_privileges
-def element_list(request, element):
-   # ----- To show the modal
-   if request.method == 'POST':
-      element_type = request.POST.get('element')
-      id = request.POST.get('id')
-
-      if element_type == 'processes':
-         add_info = AdditionalInformation.objects.get(add_info=id)
-         definitions = add_info.definitions
-         symptoms = add_info.symptoms
-         questions = add_info.questions
-      else:
-         definitions = "None"
-         symptoms = "None"
-         questions = "None"
-
-      element = Element.objects.get(pk=id)
-      letter = element.letter.name
-      
-      response = {
-         'type':element.type,         
-         'letter': letter,
-         'name':element.name,         
-         'comments':element.comments,
-         'created':element.created,
-         'updated':element.updated,      
-         'definitions':definitions,
-         'symptoms':symptoms,
-         'questions':questions,
-      }
-            
-      return JsonResponse(response)
-
-   # ----- Get
-   else:
-      list = Element.objects.filter(type=element)
-
-      return render(request, 'elements/element_list.html', {
-         'element':element,
-         'list':list,
-      })
-"""
+      	
 
 
 """--------------------------------------------------------------------------------------
     Add element
---------------------------------------------------------------------------------------"""
+--------------------------------------------------------------------------------------
 @login_required
 @user_privileges
 def add_element(request, element):
@@ -189,12 +143,12 @@ def add_element(request, element):
       'letters':letters,
       'element':element
    })
-
+"""
 
 
 """--------------------------------------------------------------------------------------
     Edit element
---------------------------------------------------------------------------------------"""
+--------------------------------------------------------------------------------------
 @login_required
 @user_privileges
 def edit_element(request, element, id):
@@ -271,7 +225,7 @@ def edit_element(request, element, id):
       'add_info':add_info,
       'id':id,
    })
-
+"""
 
 
 """--------------------------------------------------------------------------------------
