@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------------"""
 from django.urls import path
 from . import views
-from .views import ElementListView, ElementCreateView
+from .views import ElementListView, ElementCreateView, ElementUpdateView
 
 
 
@@ -13,7 +13,8 @@ from .views import ElementListView, ElementCreateView
 --------------------------------------------------------------------------------------"""
 elements_patterns = ([
     path('elements/list/<str:element>/<str:singular>/', ElementListView.as_view() , name='elements'),    
-    path('elements/add/<str:element>/<str:singular>/', ElementCreateView.as_view() , name='add'),    
+    path('elements/add/<str:element>/<str:singular>/', ElementCreateView.as_view() , name='add'),
+    path('elements/update/<str:element>/<str:singular>/<int:pk>', ElementUpdateView.as_view() , name='update'),
 ], 'elements')
 
 

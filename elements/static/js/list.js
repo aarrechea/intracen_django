@@ -1,3 +1,24 @@
+// --- When page is ready
+$(document).ready(() => {
+    if($("#message").val() != "") {
+        $("#div_elements_title h1").text($("#message").val())
+        $("#div_elements_title h1").css({
+            'color':'green',
+            'font-size':'1.5rem',
+        })
+    
+        setTimeout(() => {
+            $("#div_elements_title h1").text($("#input_title_hidden").val())
+            $("#div_elements_title h1").css({
+                'color':'black',
+                'font-size':'2rem',            
+            })
+        }, 3500);
+    }
+})
+
+
+
 // --- Select letters on change
 $("#select_letters").change(function() {
     let letter = $(this).val()

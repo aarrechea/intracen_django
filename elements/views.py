@@ -1,6 +1,4 @@
-"""--------------------------------------------------------------------------------------
-    Imports
---------------------------------------------------------------------------------------"""
+# --- Imports
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse
@@ -20,9 +18,8 @@ from decorators.views import user_privileges
 
 
 
-"""--------------------------------------------------------------------------------------
-    Element list
---------------------------------------------------------------------------------------"""
+# --- Element list
+@method_decorator(login_required, name='dispatch')
 class ElementListView(ListView):
 	model = Element
 	template_name = 'elements/list.html'   
@@ -41,13 +38,10 @@ class ElementListView(ListView):
 		context["element"] = self.element
 		context["singular"] = self.singular
 		return context
-			
-   
+			   
    
 
-"""--------------------------------------------------------------------------------------
-   Create element
---------------------------------------------------------------------------------------"""
+# ---   Create element
 @method_decorator(login_required, name='dispatch')
 class ElementCreateView(SuccessMessageMixin, CreateView):   
    template_name = 'elements/add.html'
@@ -63,16 +57,39 @@ class ElementCreateView(SuccessMessageMixin, CreateView):
       context = super().get_context_data(**kwargs)
       context["element"] = self.element
       context["singular"] = self.singular
+      context['action'] = 'Add'
       return context
    
    def get_success_url(self):      
-      return reverse_lazy("elements:elements", kwargs={"element":self.element, "singular":self.singular})
+      return reverse_lazy("elements:add", kwargs={"element":self.element, "singular":self.singular})
 
    def get_initial(self):      
       return {'element_type':self.element}
    
 
-   
+
+# --- Update element
+@method_decorator(login_required, name='dispatch')
+class ElementUpdateView(SuccessMessageMixin, UpdateView):
+   model = Element
+   template_name = 'elements/add.html'
+   form_class = ElementForm
+   success_message = 'The element was succesfully updated'   
+
+   def dispatch(self, request, *args, **kwargs):
+      self.element = kwargs['element']
+      self.singular = kwargs['singular']
+      return super().dispatch(request, *args, **kwargs)
+
+   def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)
+      context["element"] = self.element
+      context["singular"] = self.singular
+      context['action'] = 'Edit'
+      return context
+
+   def get_success_url(self):      
+      return reverse_lazy("elements:elements", kwargs={"element":self.element, "singular":self.singular})      
       
 
       	

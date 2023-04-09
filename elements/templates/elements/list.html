@@ -15,6 +15,7 @@
 {% block additional_menu %}
     <div id="div_elements_title">
         <h1>{{element|capfirst}}</h1>
+        <input hidden type="text" value="{{element|capfirst}}" id="input_title_hidden">
         
         <a href="{% url 'elements:add' element singular %}">Add</a>
         
@@ -34,6 +35,16 @@
 
 <!-- --- Content --- -->
 {% block content %}
+    <!-- --- Messages --- -->    
+    {% if messages %}
+        {% for message in messages %}
+            <input hidden type="text" value="{{message}}" id="message">
+        {% endfor %}
+    {% else %}
+        <input hidden type="text" value="" id="message">
+    {% endif %}
+
+
     <div id="div_element_card">
         {% for element in elements %}            
             <div class="div_individual_card">
@@ -67,14 +78,14 @@
                         <button disabled>Edit</button>
                         <button disabled>Delete</button>
                     {% else %}
-                        <button class="button">Edit</button>
+                        <a class="btn_edit" href="{% url 'elements:update' element.element_type singular element.id %}">Edit</a>
                         <button class="button btn_delete">Delete</button>
                     {% endif %}                    
                 </div>                
             </div>            
         {% endfor %}
     </div>    
-
+        
 
     <!-- --- Scripts ----->
     <script src="{% static 'js/jquery.js' %}"></script>

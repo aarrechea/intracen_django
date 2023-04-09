@@ -79,7 +79,7 @@ input {
     justify-content: center;
     align-items: center;
     width: 80%;
-    margin: 17rem auto 0 auto;
+    margin: 17rem auto 15rem auto;
 }
 
 
@@ -154,6 +154,21 @@ input {
 .btn_delete:hover {
     color: red;
 }
+
+
+.btn_edit {
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    font-size: 1rem;
+    padding: 0.5rem;
+    width: 76%;
+}
+    .btn_edit:hover {
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 1rem;
+    }
 
 
 

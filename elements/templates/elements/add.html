@@ -18,14 +18,25 @@
 
     <!-- --- Body --- -->
     <body>
-        {% if message %}
-            {{message}}
+        <!-- --- Messages --- -->
+        {% if messages %}
+            {% for message in messages %}
+                <input hidden type="text" value="{{message}}" id="message">
+            {% endfor %}
+        {% else %}
+            <input hidden type="text" value="" id="message">
         {% endif %}
 
+
+        <!-- --- Page title --- -->
         <div id="div_add_element_title">
-            <h1>Add {{singular}}</h1>            
+            <h1>{{action}} {{singular}}</h1>
+            <input hidden type="text" value="{{action}}" id="input_action_hidden">
+            <input hidden type="text" value="{{singular}}" id="input_singular_hidden">
         </div>                
 
+
+        <!-- --- Form --- -->
         <form method="post">
             {% csrf_token %}
             {{ form.non_field_errors }}
@@ -76,20 +87,16 @@
                     <label for="{{form.assess_five.id_for_label}}">Assess five</label>
                     {{form.assess_five}}
                     {{form.assess_five.errors}}
-
                 </div>            
             {% endif %}
             
             <div id="div_buttons">
-                <input type="submit" value="Create">
+                <input type="submit" value="{{action}}">
                 <a href="{% url 'elements:elements' element singular %}">Back</a>
             </div>                        
         </form>
 
-        {% if message %}
-            Message: {{message}}
-        {% endif %}
-
+        
         <!-- --- Scrips --- -->
         <script src="{% static 'js/jquery.js' %}"></script>
         <script src="{% static 'js/add.js' %}"></script>
