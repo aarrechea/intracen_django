@@ -79,13 +79,13 @@
                         <button disabled>Delete</button>
                     {% else %}
                         <a class="btn_edit" href="{% url 'elements:update' element.element_type singular element.id %}">Edit</a>
-                        <button class="button btn_delete">Delete</button>
+                        <a class="btn_delete" href="{% url 'elements:delete' element.element_type singular element.id %}">Delete</a>
                     {% endif %}                    
                 </div>                
             </div>            
         {% endfor %}
     </div>    
-        
+
 
     <!-- --- Scripts ----->
     <script src="{% static 'js/jquery.js' %}"></script>

@@ -20,6 +20,7 @@ from decorators.views import user_privileges
 
 # --- Element list
 @method_decorator(login_required, name='dispatch')
+@method_decorator(user_privileges, name='dispatch')
 class ElementListView(ListView):
 	model = Element
 	template_name = 'elements/list.html'   
@@ -43,6 +44,7 @@ class ElementListView(ListView):
 
 # ---   Create element
 @method_decorator(login_required, name='dispatch')
+@method_decorator(user_privileges, name='dispatch')
 class ElementCreateView(SuccessMessageMixin, CreateView):   
    template_name = 'elements/add.html'
    form_class = ElementForm
@@ -70,6 +72,7 @@ class ElementCreateView(SuccessMessageMixin, CreateView):
 
 # --- Update element
 @method_decorator(login_required, name='dispatch')
+@method_decorator(user_privileges, name='dispatch')
 class ElementUpdateView(SuccessMessageMixin, UpdateView):
    model = Element
    template_name = 'elements/add.html'
@@ -92,7 +95,36 @@ class ElementUpdateView(SuccessMessageMixin, UpdateView):
       return reverse_lazy("elements:elements", kwargs={"element":self.element, "singular":self.singular})      
       
 
-      	
+      
+# --- Delete element      	
+@method_decorator(login_required, name='dispatch')
+@method_decorator(user_privileges, name='dispatch')
+class ElementDeleteView(SuccessMessageMixin, DeleteView):
+   model = Element   
+   template_name = 'elements/element_confirm_delete.html'
+   success_message = 'The %(element)s was succesfully deleted'   
+
+   def dispatch(self, request, *args, **kwargs):
+      self.element = kwargs['element']
+      self.singular = kwargs['singular']
+      return super().dispatch(request, *args, **kwargs)
+
+   def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)
+      context["element"] = self.element
+      context["singular"] = self.singular      
+      return context
+
+   def get_success_url(self):      
+      return reverse_lazy("elements:elements", kwargs={"element":self.element, "singular":self.singular})
+
+   def get_success_message(self, cleaned_data):
+      return self.success_message % dict(
+         cleaned_data,
+         element = self.singular
+      )
+
+
 
 
 """--------------------------------------------------------------------------------------
@@ -161,8 +193,6 @@ def add_element(request, element):
       'element':element
    })
 """
-
-
 """--------------------------------------------------------------------------------------
     Edit element
 --------------------------------------------------------------------------------------
@@ -243,11 +273,9 @@ def edit_element(request, element, id):
       'id':id,
    })
 """
-
-
 """--------------------------------------------------------------------------------------
     Delete element
---------------------------------------------------------------------------------------"""
+--------------------------------------------------------------------------------------
 @login_required
 @user_privileges
 def delete_element(request):   
@@ -260,7 +288,7 @@ def delete_element(request):
       messages.success(request, message)
 
       return redirect('elements:elements', element_type)
-
+"""
 
 
 

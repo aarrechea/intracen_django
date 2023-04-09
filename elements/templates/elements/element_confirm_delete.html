@@ -1,0 +1,63 @@
+<!-- ----- Imports ----- -->
+{% load static %}
+
+
+
+
+<!-- ----- Block styles ----- -->
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/element_confirm_delete.css' %}">
+{% endblock styles %}
+
+
+<!-- ----- Body ----- -->
+<body>
+    <!-- --- Title --- -->
+    <div id="div_title">
+        <h1>Delete {{singular}}</h1>
+        <hr>
+    </div>
+
+
+    <!-- --- Form --- -->    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label>Are you sure you want to delete the following {{singular}}?</label>
+        
+        <div id="div_object">
+            {{object.name}}
+        </div>
+
+        <hr>
+            
+        <div id="div_buttons">
+            <a href="{% url 'elements:elements' element singular %}">Back</a>
+            <input type='submit' value="Delete">
+        </div>            
+    </form>    
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

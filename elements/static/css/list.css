@@ -151,12 +151,7 @@ input {
     font-size: 1rem;
 }
 
-.btn_delete:hover {
-    color: red;
-}
-
-
-.btn_edit {
+.btn_edit, .btn_delete {
     text-decoration: none;
     color: black;
     text-align: center;
@@ -164,10 +159,14 @@ input {
     padding: 0.5rem;
     width: 76%;
 }
-    .btn_edit:hover {
+    .btn_edit:hover, .btn_delete:hover {
         font-weight: bold;
         cursor: pointer;
         font-size: 1rem;
+    }
+
+    .btn_delete:hover {
+        color: red;
     }
 
 

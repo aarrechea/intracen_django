@@ -19,6 +19,7 @@ $(document).ready(function() {
 
 
 
+
 // --- Focus on textareas
 $("#div_additional_information").on('focus', '.textarea', function(){
     if($(this).attr('data-add') == 'other') {
@@ -31,3 +32,38 @@ $("#div_additional_information").on('focus', '.textarea', function(){
 $(".textarea").focusout(function() {
     $(this).attr('rows', '2')
 })
+
+
+
+
+/*
+ * Función para limitar la cantidad de veces que se presiona la tecla enter
+ * dentro de un textarea 
+ */
+function limitaSaltosLinea(txtArea, filas) {                    
+    let texto = txtArea.val().split(/\n/);    
+    
+    if(texto.length > filas) {        
+        txtArea.val(txtArea.val().substring(0, txtArea.val().length - 1));     
+    }                    
+ }
+ 
+ 
+ 
+ 
+ /*
+  * Conjunto de funciones para contar caracteres  
+  */
+ function contarCaracteres(input, label)
+ {    
+     let maxlength = input.attr("maxlength");
+     let currentLength = input.val().length;    
+     let total = maxlength - currentLength
+     label.text(total);
+ }
+
+
+
+ 
+ 
+ 
