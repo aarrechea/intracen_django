@@ -7,42 +7,49 @@
 <!-- ----- Html ----- -->
 <!DOCTYPE html>
 <html lang="en">
+   <!-- ----- Head ----- -->
    <head>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="{% static 'css/add_info.css' %}">      
-      <title>Document</title>
+      <link rel="stylesheet" href="{% static 'css/add_info.css' %}">            
    </head>
 
 
-
-
+   <!-- ----- Body ----- -->
    <body>
       <div id="myModal" class="modal">
          <div class="modal-content">
             <div id="modal-content-title">
-               <label id="labelHeader"></label>
-               <span id="close">&times;</span>                    
+               <textarea id="txt_process_title" rows="3" disabled></textarea>
+               <span class="close" id="close">&times;</span>
             </div>
-   
-            <div id="modal-content-element">
-               <textarea id="textarea-add-info"></textarea>                 
-            </div>
-   
-            <div id="modal-content-buttons">
-               <button class="btn-add-info" id="btnComments">Comments</button>
 
-               <div id="modal-content-buttons-interior">
-                  <button class="btn-add-info" id="btnDefinitions">Definitions</button>
-                  <button class="btn-add-info" id="btnSymptoms">Symptoms</button>
-                  <button class="btn-add-info" id="btnQuestions">Sample questions</button>
-               </div>
-                              
-               <button id="btnClose">Close</button>                 
+            <div id="modal-content-element">
+               <textarea class="txts" id="txt_definitions" rows='8' disabled></textarea>
+               <textarea class="txts" hidden id="txt_symptoms" rows='15' disabled></textarea>
+               <textarea hidden class="txts" id="txt_questions" rows='15' disabled></textarea>
+               <textarea hidden class="txts assess" id="txt_assess_one" rows='3' disabled></textarea>
+               <textarea hidden class="txts assess" id="txt_assess_two" rows='3' disabled></textarea>
+               <textarea hidden class="txts assess" id="txt_assess_three" rows='3' disabled></textarea>
+               <textarea hidden class="txts assess" id="txt_assess_four" rows='3' disabled></textarea>
+               <textarea hidden class="txts assess" id="txt_assess_five" rows='3' disabled></textarea>
+            </div>
+
+            <div id="modal-content-buttons">
+               <button data-name="txt_definitions" class="btn-add-info" id="btnDefinitions">Definitions</button>
+               <button data-name="txt_symptoms" class="btn-add-info" id="btnSymptoms">Symptoms</button>
+               <button data-name="txt_questions" class="btn-add-info" id="btnQuestions">Sample questions</button>
+               <button data-name="assess" class="btn-add-info assess" id="btnAssess">Assessments</button>
+               <button class="close" id="btnClose">Close</button>
             </div>
          </div>
-     </div>
+      </div>
+
+
+      <!-- ----- Scripts ----- -->
+      <script src="{% static 'js/jquery.js' %}"></script>
+      <script src="{% static 'js/add_info.js' %}"></script>
    </body>
 </html>
 

@@ -8,12 +8,16 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views import View
 from django.utils.decorators import method_decorator
+from django.http import JsonResponse
+from django.forms.models import model_to_dict
 from .models import AdditionalInformation, Element
 from .forms import ElementForm, AdditionalInformationForm
 from general.models import Letter
 from django.contrib import messages
 from decorators.views import user_privileges
+import json
 
 
 
@@ -123,6 +127,20 @@ class ElementDeleteView(SuccessMessageMixin, DeleteView):
          cleaned_data,
          element = self.singular
       )
+
+
+
+# --- Get one process to show additional information
+@method_decorator(login_required, name='dispatch')
+class GetAdditionalInformation(View):
+   def get(self, request, *args, **kwargs):      
+      process = Element.objects.get(id=kwargs['id'])      
+      data_dict = model_to_dict(process)
+      data = json.dumps(data_dict)
+      return JsonResponse(data, safe=False)
+      
+
+
 
 
 

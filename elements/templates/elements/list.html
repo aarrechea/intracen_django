@@ -35,7 +35,7 @@
 
 <!-- --- Content --- -->
 {% block content %}
-    <!-- --- Messages --- -->    
+    <!-- --- Messages --- -->
     {% if messages %}
         {% for message in messages %}
             <input hidden type="text" value="{{message}}" id="message">
@@ -45,6 +45,11 @@
     {% endif %}
 
 
+    <!-- --- Includes --- -->
+    {% include 'elements/add_info.html' %}
+
+
+    <!-- --- Card --- -->
     <div id="div_element_card">
         {% for element in elements %}            
             <div class="div_individual_card">
@@ -68,8 +73,8 @@
                 </div>
 
                 <div class="div_actions">
-                    {% if element.type == 'processes' %}
-                        <button class="button">More info</button>
+                    {% if element.element_type == 'processes' %}
+                        <button data-id="{{element.id}}" class="button more_info">More info</button>
                     {% else %}
                         <button disabled>More info</button>
                     {% endif %}

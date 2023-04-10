@@ -42,3 +42,58 @@ $("#select_letters").change(function() {
 
 
 
+// --- Cookie to make ajax works
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+             const cookie = cookies[i].trim();
+             // Does this cookie string begin with the name we want?
+             if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+             }
+          }
+    }
+    return cookieValue;
+ }
+
+// --- More information for the processess
+$(".more_info").click(function(){        
+    let id = $(this).data("id")
+    
+    $.ajax({
+        type: 'GET',
+        headers: {'X-CSRFToken': getCookie("csrftoken")},    
+        url: "/elements/detail/" + id,        
+  
+        success: function (response) {
+            fill_modal(JSON.parse(response))
+        },
+        error: function (response) {
+            console.log("Fail")
+        }
+    })
+})
+
+function fill_modal(response) {
+    $("#myModal").css('display','block')
+
+    $("#txt_process_title").text(response.name)
+    $("#txt_definitions").text(response.definitions)
+    $("#txt_symptoms").text(response.symptoms)
+    $("#txt_questions").text(response.questions)
+    $("#txt_assess_one").text(response.assess_one)
+    $("#txt_assess_two").text(response.assess_two)
+    $("#txt_assess_three").text(response.assess_three)
+    $("#txt_assess_four").text(response.assess_four)
+    $("#txt_assess_five").text(response.assess_five)    
+}
+
+
+
+
+
+
+
