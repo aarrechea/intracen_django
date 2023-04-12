@@ -16,15 +16,15 @@ from .models import AdditionalInformation, Element
 from .forms import ElementForm, AdditionalInformationForm
 from general.models import Letter
 from django.contrib import messages
-from decorators.views import user_privileges
+from selenium.webdriver.common.keys import Keys
 import json
+
 
 
 
 
 # --- Element list
 @method_decorator(login_required, name='dispatch')
-@method_decorator(user_privileges, name='dispatch')
 class ElementListView(ListView):
 	model = Element
 	template_name = 'elements/list.html'   
@@ -48,7 +48,6 @@ class ElementListView(ListView):
 
 # ---   Create element
 @method_decorator(login_required, name='dispatch')
-@method_decorator(user_privileges, name='dispatch')
 class ElementCreateView(SuccessMessageMixin, CreateView):   
    template_name = 'elements/add.html'
    form_class = ElementForm
@@ -76,7 +75,6 @@ class ElementCreateView(SuccessMessageMixin, CreateView):
 
 # --- Update element
 @method_decorator(login_required, name='dispatch')
-@method_decorator(user_privileges, name='dispatch')
 class ElementUpdateView(SuccessMessageMixin, UpdateView):
    model = Element
    template_name = 'elements/add.html'
@@ -102,7 +100,6 @@ class ElementUpdateView(SuccessMessageMixin, UpdateView):
       
 # --- Delete element      	
 @method_decorator(login_required, name='dispatch')
-@method_decorator(user_privileges, name='dispatch')
 class ElementDeleteView(SuccessMessageMixin, DeleteView):
    model = Element   
    template_name = 'elements/element_confirm_delete.html'

@@ -92,7 +92,7 @@ class ViewTests(TestCase):
     def test_lists_all_authors(self):
         # Get second page and confirm it has (exactly) remaining 3 items
         login = self.client.login(username='user_1', password='password_')
-        response = self.client.get(reverse('companies:companies'))
+        response = self.client.get(reverse('companies:companies'))        
         self.assertEqual(response.status_code, 200)        
         self.assertEqual(len(response.context['company_list']), 13)
 
